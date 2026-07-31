@@ -54,16 +54,16 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("R") and !canmove:
 			CameraManager.reset()
 			get_tree().reload_current_scene()
-
+	
 	if !has_player:
 		return
-
+	
 	if event is InputEventKey:
 		if Input.is_action_just_pressed("eject"):
 			satellite_dock_controller.eject_satellite()
 		if Input.is_action_just_pressed("help-open"):
 			help_ui_controller.handle_help()
-
+	
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			flight_controller.throttleslider.value += flight_controller.throttleslider.step

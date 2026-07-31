@@ -99,6 +99,7 @@ func spawn_sector(coord: Vector3i) -> void:
 	_spawned_sectors[coord] = planet
 
 
+
 func despawn_sector(coord: Vector3i) -> void:
 	var planet = _spawned_sectors.get(coord)
 	if planet != null and is_instance_valid(planet):

@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://c7cr002nhgjkl" path="res://Objects/satellite_dock_controller.gd" id="11_67jq3"]
 [ext_resource type="Script" uid="uid://cply244wlx0yn" path="res://Objects/damage_controller.gd" id="12_unm8h"]
 [ext_resource type="Script" uid="uid://bmcl3vw17h1nw" path="res://Objects/help_ui_controller.gd" id="13_c0aoa"]
+[ext_resource type="Script" uid="uid://b3oe0r2cf40a3" path="res://Objects/Rocket/pointer.gd" id="14_un6nu"]
+[ext_resource type="ArrayMesh" uid="uid://be6ohvktd8m7x" path="res://Assets/Arrow/Arrow.obj" id="15_qpo0r"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ijyl3"]
 height = 3.1152344
@@ -131,8 +133,19 @@ shader_parameter/fresnel_power = 1.5
 height = 3.446045
 radius = 0.85791016
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qpo0r"]
+bg_color = Color(0.1882353, 0.1882353, 0.1882353, 0.6117647)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qpo0r"]
+shading_mode = 0
+albedo_color = Color(0.42073005, 0.6532007, 0.43404537, 1)
+
 [node name="Rocket" type="RigidBody3D" unique_id=1263267957 groups=["rocket"]]
-mass = 100.0
+mass = 45.0
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
@@ -406,7 +419,7 @@ pitch_torque = 100.0
 yaw_torque = 100.0
 roll_torque = 100.0
 stabilization_strength = 100.0
-rcs_force = 300.0
+rcs_force = 230.0
 
 [node name="LandingGearController" type="Node3D" parent="." unique_id=1362416350]
 script = ExtResource("10_tt3ll")
@@ -420,6 +433,115 @@ script = ExtResource("12_unm8h")
 [node name="HelpUIController" type="Node3D" parent="." unique_id=1212083525]
 script = ExtResource("13_c0aoa")
 
+[node name="Pointer" type="Node3D" parent="." unique_id=1316266092]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2354092, 0)
+script = ExtResource("14_un6nu")
+
+[node name="Target_Position" type="Control" parent="Pointer" unique_id=906469977]
+visible = false
+layout_mode = 3
+anchor_left = 0.21900001
+anchor_top = 0.33600003
+anchor_right = 0.77500004
+anchor_bottom = 0.688
+offset_left = -4.2880096
+offset_top = 0.27198792
+offset_right = 0.19995117
+offset_bottom = 0.17599487
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Pointer/Target_Position" unique_id=1212906533]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qpo0r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Pointer/Target_Position" unique_id=382805608]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.9990001
+anchor_bottom = 0.246
+offset_right = 0.09112549
+offset_bottom = -0.08800125
+theme_override_fonts/normal_font = ExtResource("3_567k3")
+theme_override_font_sizes/normal_font_size = 33
+text = "Target Location"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pointer/Target_Position" unique_id=1197132148]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -29.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="X" type="VBoxContainer" parent="Pointer/Target_Position/HBoxContainer" unique_id=369131971]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pointer/Target_Position/HBoxContainer/X" unique_id=1553916668]
+layout_mode = 2
+text = "X"
+
+[node name="Xloc" type="LineEdit" parent="Pointer/Target_Position/HBoxContainer/X" unique_id=1322115954]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 13
+placeholder_text = "X coordinate"
+
+[node name="Y" type="VBoxContainer" parent="Pointer/Target_Position/HBoxContainer" unique_id=1893778184]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pointer/Target_Position/HBoxContainer/Y" unique_id=570208662]
+layout_mode = 2
+text = "Y"
+
+[node name="Yloc" type="LineEdit" parent="Pointer/Target_Position/HBoxContainer/Y" unique_id=1769646211]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 13
+placeholder_text = "Y coordinate"
+
+[node name="Z" type="VBoxContainer" parent="Pointer/Target_Position/HBoxContainer" unique_id=1253631709]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pointer/Target_Position/HBoxContainer/Z" unique_id=809811676]
+layout_mode = 2
+text = "Z"
+
+[node name="Zloc" type="LineEdit" parent="Pointer/Target_Position/HBoxContainer/Z" unique_id=754548121]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 13
+placeholder_text = "Z coordinate"
+
+[node name="Button" type="Button" parent="Pointer/Target_Position" unique_id=1050107225]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.72400004
+anchor_right = 0.657
+anchor_bottom = 0.943
+offset_left = 0.21499634
+offset_top = -0.072006226
+offset_right = 0.23498535
+offset_bottom = -0.0039978027
+grow_horizontal = 2
+grow_vertical = 2
+text = "Go"
+
+[node name="Arrow" type="MeshInstance3D" parent="Pointer" unique_id=1098844092]
+transform = Transform3D(3.54, 0, 0, 0, -1.5473832e-07, 3.54, 0, -3.54, -1.5473832e-07, 0, 0, -1.7050214)
+mesh = ExtResource("15_qpo0r")
+surface_material_override/0 = SubResource("StandardMaterial3D_qpo0r")
+
 [connection signal="body_entered" from="." to="." method="collision_impact"]
 [connection signal="body_entered" from="ProximityArea" to="." method="_on_proximity_entered"]
 [connection signal="body_exited" from="ProximityArea" to="." method="_on_proximity_exited"]
+[connection signal="pressed" from="Pointer/Target_Position/Button" to="Pointer" method="_on_button_pressed"]

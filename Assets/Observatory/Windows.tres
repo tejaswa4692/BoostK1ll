@@ -1,7 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://b1s3git8yleqy"]
 
+[ext_resource type="Texture2D" uid="uid://dnahoogkxhyn4" path="res://Assets/Observatory/image.jpg" id="1_btfyi"]
+
 [resource]
-transparency = 1
-depth_draw_mode = 1
-shading_mode = 2
-albedo_color = Color(0.7137255, 0.85882354, 0.99215686, 0.29411766)
+albedo_texture = ExtResource("1_btfyi")

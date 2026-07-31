@@ -20,6 +20,8 @@ uniform float rim_power : hint_range(0.5, 8.0) = 2.0;
 uniform vec4 atmosphere_color : source_color = vec4(0.4, 0.6, 1.0, 1.0);
 uniform float atmosphere_strength : hint_range(0.0, 1.0) = 0.3;
 
+uniform float surface_glow_strength : hint_range(0.0, 5.0) = 0.0;
+uniform float surface_glow_threshold : hint_range(0.0, 1.0) = 0.6;
 // --- Hashing ---
 vec3 hash3(vec3 p) {
 	p = vec3(
@@ -151,7 +153,11 @@ void fragment() {
 	ROUGHNESS = roughness_val;
 	METALLIC = 0.0;
 
+	float brightness = max(col.r, max(col.g, col.b));
+	float glow_mask = smoothstep(surface_glow_threshold, 1.0, brightness);
+	vec3 surface_glow = col * glow_mask * surface_glow_strength;
+
 	float rim = 1.0 - abs(dot(normalize(local_normal), normalize(VIEW)));
 	rim = pow(rim, rim_power);
-	EMISSION = atmosphere_color.rgb * rim * atmosphere_strength;
+	EMISSION = atmosphere_color.rgb * rim * atmosphere_strength + surface_glow;
 }

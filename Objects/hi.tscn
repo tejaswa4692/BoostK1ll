@@ -11,6 +11,7 @@
 [ext_resource type="Material" uid="uid://dkoxk4h4sw5n7" path="res://Assets/Starfield/StarShader.tres" id="9_6ejgq"]
 [ext_resource type="Shader" uid="uid://b32qsklw5flmn" path="res://Objects/nebula.gdshader" id="10_jvksb"]
 [ext_resource type="Shader" uid="uid://d06hr80gyghnj" path="res://Objects/blackhole.gdshader" id="11_k4dlt"]
+[ext_resource type="PackedScene" uid="uid://b8sla8idannnh" path="res://Objects/Planet.tscn" id="12_6ejgq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_twcok"]
 size = Vector3(10, 36, 30.365)
@@ -554,13 +555,16 @@ script = ExtResource("8_gu6rj")
 material_override = ExtResource("9_6ejgq")
 
 [node name="Nebula" type="MeshInstance3D" parent="." unique_id=1270871616]
-transform = Transform3D(-102.81945, 85.82204, -40.431988, 85.83508, 58.76333, -93.547935, -40.40425, -93.55991, -95.843864, 597.81305, 130.68958, 939.2029)
+transform = Transform3D(-102.81945, 85.82204, -40.431988, 85.83508, 58.76333, -93.547935, -40.40425, -93.55991, -95.843864, 597.81305, 130.68958, 1502.2185)
 mesh = SubResource("BoxMesh_twcok")
 surface_material_override/0 = SubResource("ShaderMaterial_vqi4f")
 
 [node name="BlackHole" type="MeshInstance3D" parent="." unique_id=766289349]
 transform = Transform3D(96.78586, 22.180716, -11.853847, -25.14951, 85.36069, -45.618584, -2.9802322e-06, 47.133522, 88.19541, 2193.148, -519.35345, -5555.2773)
 mesh = SubResource("SphereMesh_oi4fq")
+
+[node name="Planet-Earth3" parent="." unique_id=58250303 instance=ExtResource("12_6ejgq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.02928, -69.369, -131.04541)
 
 [connection signal="pressed" from="Control/MainMenu/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Control/MainMenu/Settings" to="." method="_on_settings_pressed"]

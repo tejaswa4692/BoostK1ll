@@ -5,12 +5,16 @@
 [ext_resource type="Script" uid="uid://d28b4qsc71grw" path="res://Objects/inventory_ui.gd" id="4_cya1h"]
 [ext_resource type="Texture2D" uid="uid://brhmqwt3srrql" path="res://Assets/InventoryIcons/observatory.png" id="4_l4ocb"]
 [ext_resource type="Texture2D" uid="uid://bjmkxkd5nls7a" path="res://Assets/Boney/Boney_RocketTex.png" id="4_lka1x"]
+[ext_resource type="Texture2D" uid="uid://cuep2bpaupu5q" path="res://Assets/InventoryIcons/rover.png" id="5_owlgc"]
+[ext_resource type="Script" uid="uid://68la6fg21jmr" path="res://Objects/Player/build_menu.gd" id="5_qstlm"]
 [ext_resource type="Script" uid="uid://diqxtgrhtg76o" path="res://Objects/Player/Movement_functions.gd" id="6_l4ocb"]
+[ext_resource type="Texture2D" uid="uid://bxnrivd8fmhi" path="res://icon.png" id="7_3gbvp"]
 [ext_resource type="Script" uid="uid://bqaendqpu3g3k" path="res://Objects/mount_controller.gd" id="7_cya1h"]
 [ext_resource type="Script" uid="uid://nl4xrgyoq1ma" path="res://Objects/satellite_ui_controller.gd" id="8_b3isb"]
 [ext_resource type="Script" uid="uid://clx06nns2pqke" path="res://Objects/placement_controller.gd" id="9_lhpfe"]
 [ext_resource type="Script" uid="uid://dd6d6yt672gtw" path="res://Objects/back_pack_controller.gd" id="10_l0frw"]
 [ext_resource type="Script" uid="uid://mir8cju4ku2b" path="res://Objects/scrap_manager.gd" id="11_8fhyy"]
+[ext_resource type="AudioStream" uid="uid://btu2vp246g6w8" path="res://Assets/Music/alex_jauk-walking-in-water-199418.mp3" id="12_st566"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s3ig0"]
 radius = 0.10449219
@@ -71,6 +75,10 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.62954575, 0.6230115, 0.63273174, 1)
+
+[sub_resource type="Theme" id="Theme_3gbvp"]
+default_font = ExtResource("2_emjar")
+default_font_size = 25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aobt8"]
 resource_name = "Heknet"
@@ -459,13 +467,50 @@ anchors_preset = -1
 anchor_left = 0.86600006
 anchor_top = 0.019000001
 anchor_right = 0.99000007
-anchor_bottom = 0.09200001
+anchor_bottom = 0.054
 offset_left = 2.36792
 offset_top = -0.31200123
 offset_right = 0.51989746
-offset_bottom = -21.616005
+offset_bottom = 0.00799942
 grow_horizontal = 0
 text = "Scraps: 0"
+horizontal_alignment = 2
+
+[node name="Refined Scrap" type="RichTextLabel" parent="NormalBoneyUI" unique_id=823666865]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86600006
+anchor_top = 0.057000004
+anchor_right = 0.99000007
+anchor_bottom = 0.097
+offset_left = -2.63208
+offset_top = 0.063999176
+offset_right = 0.51989746
+offset_bottom = 0.14399719
+grow_horizontal = 0
+text = "Refined Scrap: 0"
+horizontal_alignment = 2
+
+[node name="Copper" type="RichTextLabel" parent="NormalBoneyUI" unique_id=778482124]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86600006
+anchor_top = 0.097
+anchor_right = 0.99000007
+anchor_bottom = 0.142
+grow_horizontal = 0
+text = "Copper: 0"
+horizontal_alignment = 2
+
+[node name="Iron" type="RichTextLabel" parent="NormalBoneyUI" unique_id=1854709358]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86600006
+anchor_top = 0.136
+anchor_right = 0.99000007
+anchor_bottom = 0.19600001
+grow_horizontal = 0
+text = "Iron: 0"
 horizontal_alignment = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1829888483]
@@ -490,10 +535,25 @@ far = 10000.0
 transform = Transform3D(0.99932206, -0.026037544, 0.026028717, 0.026037544, -4.371139e-08, -0.99966097, 0.026028717, 0.99966097, 0.00067791005, -0.10714546, 0, -0.52386856)
 target_position = Vector3(0, -3.45, 0)
 
-[node name="RayCast3D" type="RayCast3D" parent="." unique_id=490176355]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012536094, 0)
+[node name="WalkCast" type="RayCast3D" parent="." unique_id=490176355]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005469188, 0)
 target_position = Vector3(0, -0.085, 0)
 collision_mask = 3
+
+[node name="NeedScraps" type="RichTextLabel" parent="." unique_id=1798634124]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.957732, 0.22866708, 0.3345502, 1)
+theme_override_font_sizes/normal_font_size = 42
+text = "Need {} Scraps"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Help" type="Control" parent="." unique_id=1045096868]
 layout_mode = 3
@@ -546,6 +606,7 @@ grow_vertical = 2
 script = ExtResource("4_cya1h")
 
 [node name="BottomInventory" type="Control" parent="InventoryUI" unique_id=1826866214]
+visible = false
 layout_mode = 1
 anchor_left = 0.28
 anchor_top = 0.883
@@ -559,9 +620,11 @@ grow_vertical = 2
 
 [node name="ItemList" type="ItemList" parent="InventoryUI/BottomInventory" unique_id=383633136]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.27600002
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 0.019996643
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cya1h")
@@ -573,6 +636,86 @@ item_0/icon = ExtResource("4_l4ocb")
 item_1/icon = ExtResource("4_l4ocb")
 item_2/icon = ExtResource("4_l4ocb")
 item_3/icon = ExtResource("4_l4ocb")
+
+[node name="BuildMenu" type="Control" parent="InventoryUI" unique_id=167934685]
+visible = false
+layout_mode = 1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_qstlm")
+
+[node name="Panel" type="Panel" parent="InventoryUI/BuildMenu" unique_id=327550145]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="InventoryUI/BuildMenu" unique_id=1746766461]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.040000003
+anchor_right = 0.96
+anchor_bottom = 0.96
+offset_left = 0.20959473
+grow_horizontal = 2
+grow_vertical = 2
+item_count = 3
+max_columns = 5
+fixed_icon_size = Vector2i(100, 100)
+item_0/icon = ExtResource("4_l4ocb")
+item_1/icon = ExtResource("5_owlgc")
+item_2/icon = ExtResource("7_3gbvp")
+
+[node name="TextureRect" type="TextureRect" parent="InventoryUI/BuildMenu" unique_id=2077934651]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015
+anchor_right = 0.323
+anchor_bottom = 0.61
+offset_right = 0.3423767
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_l4ocb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InventoryUI/BuildMenu" unique_id=792075779]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015000001
+anchor_top = 0.595
+anchor_right = 0.31800002
+anchor_bottom = 0.84000003
+offset_left = 2.2319937
+offset_top = 0.063964844
+offset_right = 0.03036499
+offset_bottom = -0.19204712
+grow_vertical = 0
+theme = SubResource("Theme_3gbvp")
+theme_override_font_sizes/normal_font_size = 11
+text = "Hi this is an observatory which is very cool it costs around 10 scraps to make"
+
+[node name="Button" type="Button" parent="InventoryUI/BuildMenu" unique_id=1343743992]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015
+anchor_top = 0.86
+anchor_right = 0.324
+anchor_bottom = 0.95500004
+offset_left = -0.7680054
+offset_top = 0.031982422
+offset_right = -0.076812744
+offset_bottom = 0.031951904
+grow_horizontal = 2
+grow_vertical = 2
+text = "Build"
 
 [node name="Marker3D" type="Marker3D" parent="." unique_id=1090321486]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13529381, 0.20635363, -0.121307194)
@@ -586,21 +729,21 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, -0.022641242, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, -0.022641242, 0)
-bones/0/rotation = Quaternion(-0.031473517, 1.11198545e-07, -6.565482e-09, 0.9995046)
+bones/0/rotation = Quaternion(-0.008824716, 1.113231e-07, -1.5673284e-09, 0.9999611)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23699029, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.23699029, 0)
-bones/1/rotation = Quaternion(0.029904215, -5.0313538e-05, -0.0007910554, 0.99955255)
+bones/1/rotation = Quaternion(0.007254731, -6.821986e-05, -0.0007897201, 0.99997336)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "LeftHand"
 bones/2/parent = 0
 bones/2/rest = Transform3D(-0.9319116, -0.36268908, -2.1853853e-07, 0.36268958, -0.9319103, 1.2662169e-07, -2.4958297e-07, 3.8738506e-08, 1, -0.123382494, 0.2129689, -2.6189195e-08)
 bones/2/enabled = true
 bones/2/position = Vector3(-0.123382494, 0.2129689, -2.6189195e-08)
-bones/2/rotation = Quaternion(-0.115522824, -0.08334643, 0.97021544, 0.19593342)
+bones/2/rotation = Quaternion(-0.11637378, -0.087369874, 0.97493386, 0.16830826)
 bones/2/scale = Vector3(1.0000014, 1, 1)
 bones/3/name = "LeftHand.001"
 bones/3/parent = 2
@@ -614,7 +757,7 @@ bones/4/parent = 0
 bones/4/rest = Transform3D(-0.9247777, 0.3805076, -1.2222918e-06, -0.38050753, -0.92477787, -2.7046394e-07, -1.2332617e-06, 2.1497219e-07, 1, 0.14194445, 0.21078514, 3.7363087e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(0.14180034, 0.21131313, 1.8976223e-05)
-bones/4/rotation = Quaternion(-0.114539914, -0.14003608, 0.96038467, -0.21197142)
+bones/4/rotation = Quaternion(-0.11528386, -0.13735297, 0.966351, -0.18441679)
 bones/4/scale = Vector3(0.9999999, 1, 1)
 bones/5/name = "RightHand.001"
 bones/5/parent = 4
@@ -671,14 +814,14 @@ settings/0/joints/1/limitation = null
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="Armature/Skeleton3D" unique_id=1314951815]
 
 [node name="Physical Bone RightHand" type="PhysicalBone3D" parent="Armature/Skeleton3D/PhysicalBoneSimulator3D" unique_id=757157688]
-transform = Transform3D(-1.5381342, 0.41501892, -0.6974795, -0.6348272, -1.546396, 0.47982186, -0.50568044, 0.6789653, 1.5191671, 0.19148675, 0.15611134, -0.112524725)
+transform = Transform3D(-1.5680609, 0.32473186, -0.67846096, -0.52984875, -1.5903076, 0.46341887, -0.53387296, 0.62453663, 1.5328108, 0.1931509, 0.15715407, -0.10499671)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 joint_type = 1
-joint_offset = Transform3D(1.0000005, -4.4408905e-16, 1.4901158e-08, 0, 1.0000004, 2.9802322e-08, -1.4901161e-08, -2.9802326e-08, 1.0000002, 0.0019278518, -0.00097214605, 0.0664072)
+joint_offset = Transform3D(1.0000005, -4.4408905e-16, 1.4901158e-08, 0, 1.0000004, 2.9802322e-08, -1.4901161e-08, -2.9802326e-08, 1.0000002, 0.003228358, -0.0011536763, 0.06767324)
 joint_rotation = Vector3(-2.9802315e-08, 1.4901154e-08, 0)
-body_offset = Transform3D(1.7365348, 0.094213545, -0.012119651, -0.0132505, 0.020532489, -1.7389588, -0.09406105, 1.7364552, 0.021219492, -0.0024513602, 0.11552488, 0.00046029687)
+body_offset = Transform3D(1.7366463, 0.09275903, -0.005462408, -0.0064331293, 0.01803732, -1.7390249, -0.092696935, 1.7365611, 0.018355012, -0.005129844, 0.11772704, 0.0010605454)
 bone_name = "RightHand"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -707,9 +850,6 @@ script = ExtResource("10_l0frw")
 
 [node name="ScrapManager" type="Node3D" parent="." unique_id=946725058]
 script = ExtResource("11_8fhyy")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=844678714]
-transform = Transform3D(1, 0, 0, 0, -0.681909, 0.731437, 0, -0.731437, -0.681909, 0, 10.850779, 0)
 
 [node name="SatteliteUI" type="Control" parent="." unique_id=1656404811]
 visible = false
@@ -860,6 +1000,14 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ab5kg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_l4ocb")
 text = "Done"
 
+[node name="WaterWalk" type="AudioStreamPlayer3D" parent="." unique_id=977198435]
+stream = ExtResource("12_st566")
+attenuation_model = 2
+volume_db = 22.265
+pitch_scale = 3.75
+
+[connection signal="item_clicked" from="InventoryUI/BuildMenu/ItemList" to="InventoryUI/BuildMenu" method="_on_item_list_item_clicked"]
+[connection signal="pressed" from="InventoryUI/BuildMenu/Button" to="InventoryUI/BuildMenu" method="try_place_buildmenu"]
 [connection signal="item_clicked" from="SatteliteUI/ItemList" to="." method="_on_item_list_item_clicked"]
 [connection signal="item_clicked" from="SatteliteUI/ItemList" to="SatelliteUIController" method="on_item_list_item_clicked"]
 [connection signal="item_clicked" from="SatteliteUI/UpgradesList" to="." method="_on_item_list_item_clicked"]

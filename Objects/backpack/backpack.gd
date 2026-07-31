@@ -9,8 +9,11 @@ var has_player: bool = false
 const ICON_PATH := "res://Assets/InventoryIcons/%s.png"
 var _icon_cache: Dictionary = {}
 
+@onready var animationplayer = $BoxPlayer
+
 
 func _ready() -> void:
+	animationplayer.play("CloseNew")
 	item_list.icon_mode = ItemList.ICON_MODE_TOP
 	item_list.fixed_icon_size = Vector2i(250, 250)   # match whatever your hotbar uses
 	item_list.item_clicked.connect(_on_item_clicked)
@@ -58,10 +61,12 @@ func remove_item(item_name: String, amount: int = 1) -> bool:
 # ---------------- UI ----------------
 
 func open_ui() -> void:
+	animationplayer.play("OpenNew")
 	ui_layer.show()
 	_refresh()
 
 func close_ui() -> void:
+	animationplayer.play("CloseNew")
 	ui_layer.hide()
 
 func _refresh() -> void:

@@ -9,7 +9,7 @@ var has_observatory: bool = false
 
 @export_group("Atmosphere")
 @export var sun_node: Node3D
-@export var atmosphere_height_ratio: float = 1.15 # atmosphere_radius = planet_radius * this
+@export var atmosphere_height_ratio: float = 1.15 
 @export var atmosphere_intensity_multiplier: float = 0.235 
 var atmosphere_material: ShaderMaterial
 var atmosphere_mesh_instance: MeshInstance3D
@@ -22,11 +22,11 @@ var rock_mesh = preload("res://Assets/Debries/rock.obj") as Mesh
 @export_group("Planet Properties")
 @export var temperature_min: float = -150.0
 @export var temperature_max: float = 150.0
-@export var cold_threshold: float = -20.0   # at/below this -> ICE
-@export var hot_threshold: float = 60.0     # at/above this -> MAGMA
-@export var min_air_for_water: float = 0.3  # temperate planets need at least this much air to hold water
+@export var cold_threshold: float = -20.0  
+@export var hot_threshold: float = 60.0   
+@export var min_air_for_water: float = 0.3  
 var temperature: float = 15.0
-var air_density: float = 1.0  # 0 = vacuum, 1 = earth-like
+var air_density: float = 1.0  
 var has_water: bool = false
 
 enum PlanetClimate { ICE, TEMPERATE, MAGMA }
@@ -272,8 +272,8 @@ func _generate_atmosphere_material() -> void:
 	atmosphere_material.set_shader_parameter("planet_radius", planet_radius)
 	atmosphere_material.set_shader_parameter("atmosphere_radius", atmosphere_radius)
 	atmosphere_material.set_shader_parameter("density_falloff", rng.randf_range(6.0, 10.0))
-	atmosphere_material.set_shader_parameter("intensity", rng.randf_range(12.0, 24.0) * atmosphere_intensity_multiplier)
-	atmosphere_material.set_shader_parameter("mie_coefficient", rng.randf_range(15.0, 25.0))
+	atmosphere_material.set_shader_parameter("intensity", 12 * atmosphere_intensity_multiplier)
+	atmosphere_material.set_shader_parameter("mie_coefficient", 0)
 	var base_total := 5.5 + 13.0 + 22.4
 	var col_sum: float = planet_color_deep.r + planet_color_deep.g + planet_color_deep.b
 	if col_sum <= 0.001:

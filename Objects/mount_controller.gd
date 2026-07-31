@@ -18,6 +18,7 @@ func do_mount(target) -> void:
 		player.mounted_target.has_player = false
 	player.is_mounted = true
 	player.mounted_target = target
+	player.stop_water_walk_audio()
 	player.visible = false
 	player.get_node("CollisionShape3D").disabled = true
 	player.set_physics_process(false)

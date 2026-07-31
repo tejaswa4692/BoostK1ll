@@ -1,0 +1,266 @@
+[gd_scene format=3 uid="uid://byoxed237y2fg"]
+
+[ext_resource type="Script" uid="uid://ca4g6h6cvyu07" path="res://Objects/Refinery/refinery.gd" id="1_ivw4s"]
+[ext_resource type="Script" uid="uid://djstyy283bel7" path="res://Objects/Refinery/refinery_ui.gd" id="2_gnwwr"]
+[ext_resource type="FontFile" uid="uid://dujscdaiocpca" path="res://Assets/0xProto/0xProtoNerdFont-Regular.ttf" id="2_kx2vx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n7p8d"]
+size = Vector3(1, 0.125, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n7p8d"]
+size = Vector3(1.2947998, 1.529541, 1.3522949)
+
+[sub_resource type="ImageTexture" id="ImageTexture_kx2vx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kx2vx"]
+bg_color = Color(0.8251576, 0.5105031, 0.34341866, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnwwr"]
+bg_color = Color(0.0687983, 0.06879826, 0.068798296, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_gnwwr"]
+default_font = ExtResource("2_kx2vx")
+default_font_size = 25
+HSlider/icons/grabber = SubResource("ImageTexture_kx2vx")
+HSlider/icons/grabber_disabled = SubResource("ImageTexture_kx2vx")
+HSlider/icons/grabber_highlight = SubResource("ImageTexture_kx2vx")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_kx2vx")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_kx2vx")
+HSlider/styles/slider = SubResource("StyleBoxFlat_gnwwr")
+
+[node name="Refinery" type="Node3D" unique_id=1738504274]
+script = ExtResource("1_ivw4s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1615286538]
+mesh = SubResource("BoxMesh_n7p8d")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2065942981]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2054835069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042053223, -0.2647705, -0.06530762)
+shape = SubResource("BoxShape3D_n7p8d")
+
+[node name="RefineryUI" type="Control" parent="." unique_id=228163080]
+layout_mode = 3
+anchor_left = 0.2
+anchor_top = 0.15
+anchor_right = 0.8
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_gnwwr")
+
+[node name="Panel" type="Panel" parent="RefineryUI" unique_id=1678765717]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="RefineryUI" unique_id=927908167]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = SubResource("Theme_gnwwr")
+theme_override_font_sizes/font_size = 42
+text = "Refine Scraps"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrapsInText" type="Label" parent="RefineryUI" unique_id=1954434783]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.246
+anchor_right = 0.25800002
+anchor_bottom = 0.324
+offset_left = 0.09918976
+offset_top = 0.21439362
+offset_right = 0.27037048
+offset_bottom = -0.16641235
+theme = SubResource("Theme_gnwwr")
+text = "Material in:"
+
+[node name="ScrapsInAmount" type="Label" parent="RefineryUI" unique_id=1060723951]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.305
+anchor_top = 0.28500003
+anchor_right = 0.46500003
+anchor_bottom = 0.28500003
+offset_left = -0.21603394
+offset_top = -17.476013
+offset_right = 7.1919556
+offset_bottom = 17.523987
+theme = SubResource("Theme_gnwwr")
+text = "100"
+
+[node name="ScrapsOutText" type="Label" parent="RefineryUI" unique_id=268254048]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031000001
+anchor_top = 0.40600002
+anchor_right = 0.43100002
+anchor_bottom = 0.40600002
+offset_left = 2.1727886
+offset_top = -15.361618
+offset_right = -0.30725098
+offset_bottom = 15.638382
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gnwwr")
+text = "Material out: "
+
+[node name="expectedOutAmount" type="Label" parent="RefineryUI" unique_id=816988819]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33400002
+anchor_top = 0.40600002
+anchor_right = 0.48600003
+anchor_bottom = 0.40600002
+offset_left = -0.26083374
+offset_top = -15.361618
+offset_right = -0.3232422
+offset_bottom = 15.638382
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gnwwr")
+text = "10"
+
+[node name="ScrapsPreparedText" type="Label" parent="RefineryUI" unique_id=45497237]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.040000003
+anchor_top = 0.75600004
+anchor_right = 0.43600002
+anchor_bottom = 0.82600003
+offset_left = -0.04801178
+offset_top = 0.87838745
+offset_right = 0.23675537
+offset_bottom = 0.12640381
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gnwwr")
+text = "Prepared: "
+
+[node name="ScrapsPreparedAmount" type="Label" parent="RefineryUI" unique_id=321078564]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.257
+anchor_top = 0.75600004
+anchor_right = 0.409
+anchor_bottom = 0.82400006
+offset_left = 1.9615936
+offset_top = 1.8783875
+offset_right = 4.89917
+offset_bottom = 2.0335693
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gnwwr")
+text = "100"
+
+[node name="ItemList" type="ItemList" parent="RefineryUI" unique_id=1183285567]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.16800001
+anchor_right = 0.94900006
+anchor_bottom = 0.92300004
+offset_bottom = 0.12719727
+theme = SubResource("Theme_gnwwr")
+theme_override_font_sizes/font_size = 15
+item_count = 3
+item_0/text = "Refined scrap"
+item_1/text = "Copper"
+item_2/text = "Iron"
+
+[node name="TimerVisualiser" type="HSlider" parent="RefineryUI" unique_id=780914212]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027
+anchor_top = 0.5
+anchor_right = 0.43100002
+anchor_bottom = 0.52500004
+theme = SubResource("Theme_gnwwr")
+max_value = 1.0
+step = 0.01
+value = 0.3
+editable = false
+scrollable = false
+
+[node name="Take" type="Button" parent="RefineryUI" unique_id=922044605]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.108
+anchor_top = 0.87000006
+anchor_right = 0.397
+anchor_bottom = 0.93900007
+offset_left = -1.049614
+offset_top = 0.16796875
+offset_right = 0.193573
+offset_bottom = -0.13043213
+theme = SubResource("Theme_gnwwr")
+theme_override_font_sizes/font_size = 18
+disabled = true
+text = "Take"
+
+[node name="More" type="Button" parent="RefineryUI" unique_id=1925371262]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.052
+anchor_top = 0.60800004
+anchor_right = 0.14400001
+anchor_bottom = 0.698
+offset_left = -0.34241104
+offset_top = 0.011169434
+offset_right = -0.3328247
+offset_bottom = -0.012817383
+text = "More"
+
+[node name="Less" type="Button" parent="RefineryUI" unique_id=1689068996]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.32900003
+anchor_top = 0.61
+anchor_right = 0.42100003
+anchor_bottom = 0.698
+offset_left = 0.19517517
+offset_top = 0.104003906
+offset_right = 0.20474243
+offset_bottom = -0.012817383
+text = "Less"
+
+[node name="Cook" type="Button" parent="RefineryUI" unique_id=248044164]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18900001
+anchor_top = 0.60800004
+anchor_right = 0.28100002
+anchor_bottom = 0.698
+offset_left = -0.036819458
+offset_top = 0.011169434
+offset_right = -0.027236938
+offset_bottom = -0.012817383
+disabled = true
+text = "Cook"
+
+[node name="CookTimer" type="Timer" parent="RefineryUI" unique_id=1328795295]
+wait_time = 0.2
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="item_selected" from="RefineryUI/ItemList" to="RefineryUI" method="_on_item_list_item_selected"]
+[connection signal="pressed" from="RefineryUI/Take" to="RefineryUI" method="_on_take_pressed"]
+[connection signal="pressed" from="RefineryUI/More" to="RefineryUI" method="add_more"]
+[connection signal="pressed" from="RefineryUI/Less" to="RefineryUI" method="add_less"]
+[connection signal="pressed" from="RefineryUI/Cook" to="RefineryUI" method="_on_cook_pressed"]
+[connection signal="timeout" from="RefineryUI/CookTimer" to="RefineryUI" method="_on_cook_timer_timeout"]

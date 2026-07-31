@@ -8,8 +8,8 @@ var Inventory: Array = []      # Array of {"item": String, "count": int, "backpa
 var selected_index: int = 0
 
 func _ready() -> void:
-	add_item("observatory", 9)
-	add_item("rover", 2)
+	add_item("observatory", 1)
+	add_item("rover", 1)
 
 # ---------------- Normal stackable items ----------------
 

@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://063xnatpuj40"]
+
+[ext_resource type="Script" uid="uid://dcaqhhx8oacxp" path="res://Objects/Grave/grave.gd" id="1_gnmg7"]
+[ext_resource type="PackedScene" uid="uid://dcqrmjvkcutoy" path="res://Assets/Mystery/Grave.blend" id="1_my73n"]
+[ext_resource type="Texture2D" uid="uid://bsvxpp6qfgmdt" path="res://Assets/Mystery/cartoon-style-old-paper-scroll-parchment-with-torn-edges-vector-removebg-preview.png" id="2_wk38h"]
+[ext_resource type="FontFile" uid="uid://cwa24p4noc5fn" path="res://Assets/seaweed-script/SeaweedScript-Regular.ttf" id="3_o8say"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_my73n"]
+size = Vector3(0.56243896, 0.2942505, 0.82873535)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gnmg7"]
+size = Vector3(1.0791016, 0.8676758, 1.283081)
+
+[node name="Grave" type="Node3D" unique_id=189125073]
+script = ExtResource("1_gnmg7")
+
+[node name="Grave" parent="." unique_id=169942349 instance=ExtResource("1_my73n")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1429815806]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1696711118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.051849365, 0.1402893, -0.016296387)
+shape = SubResource("BoxShape3D_my73n")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1641550314]
+transform = Transform3D(0.09493061, 0, 0.0036302735, -0.0034030757, 0.033080146, 0.088989444, -0.0012641051, -0.089054495, 0.033055983, 0.00013154144, 0.056922257, 0.23585175)
+pixel_size = 0.005
+texture = ExtResource("2_wk38h")
+
+[node name="Paper" type="Control" parent="." unique_id=1302178387]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Paper" unique_id=876422803]
+texture = ExtResource("2_wk38h")
+
+[node name="Label" type="Label" parent="Paper" unique_id=772045175]
+layout_mode = 0
+offset_left = -157.0
+offset_top = -197.0
+offset_right = 153.0
+offset_bottom = 203.0
+theme_override_colors/font_color = Color(0.31999648, 0.19910994, 0.09149072, 1)
+theme_override_fonts/font = ExtResource("3_o8say")
+theme_override_font_sizes/font_size = 16
+text = "Day 73,
+Ive run out of food, water wont last a day. To whoever who finds this message, They told us we will be exploring new habitable planets, but something isnt right, the rot is consuming reality in front of my eyes, This is not gods wrath, this is something way worse, I came running away from it as far as i could, i cant outrun it. It will eat us all. In the end we were just disposable beings, mere lab rats sent by the men in power to watch us die. My time is limited, i wouldnt be of any help, but maybe my homebase might be of some help to you. The cordinates to it are  350 230 775, Be careful out there, and remember if you see the rot, Turn back and run as fast as you can."
+autowrap_mode = 2
+
+[node name="PlayerArea" type="Area3D" parent="." unique_id=42581853]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea" unique_id=1817847556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03955078, 0.41079998, 0.006652832)
+shape = SubResource("BoxShape3D_gnmg7")
+
+[connection signal="body_entered" from="PlayerArea" to="." method="_on_player_area_body_entered"]
+[connection signal="body_exited" from="PlayerArea" to="." method="_on_player_area_body_exited"]

@@ -39,7 +39,7 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"Material.002": {
+"Telescope": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://Assets/Observatory/Windows.tres",
 "use_external/path": "uid://b1s3git8yleqy"

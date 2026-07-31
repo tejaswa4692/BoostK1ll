@@ -20,3 +20,5 @@ shader_parameter/roughness_val = 0.85
 shader_parameter/rim_power = 0.5
 shader_parameter/atmosphere_color = Color(0, 0, 0, 1)
 shader_parameter/atmosphere_strength = 0.0
+shader_parameter/surface_glow_strength = 5.0
+shader_parameter/surface_glow_threshold = 0.6

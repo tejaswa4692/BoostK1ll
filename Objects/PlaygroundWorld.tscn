@@ -15,12 +15,10 @@
 [ext_resource type="Script" uid="uid://ijhb3s4kpc2t" path="res://Objects/blackhole_easteregg/black_hole.gd" id="13_q7ck0"]
 [ext_resource type="Texture2D" uid="uid://cfd2njvlink4f" path="res://Assets/RocketMesh/the-eye-of-despair-v0-7opg5e4gy10e1.png" id="14_abo4m"]
 [ext_resource type="FontFile" uid="uid://b0recaxa13gtf" path="res://Assets/0xProto/0xProtoNerdFont-Bold.ttf" id="14_k2xjf"]
-[ext_resource type="PackedScene" uid="uid://c3jnwrpmlbvbp" path="res://Assets/Rover/rover.tscn" id="16_ojfgx"]
 [ext_resource type="FontFile" uid="uid://dujscdaiocpca" path="res://Assets/0xProto/0xProtoNerdFont-Regular.ttf" id="17_kvg7m"]
 [ext_resource type="PackedScene" uid="uid://dhk7cv8g2j1gw" path="res://Objects/DockingShip/docking_ship.tscn" id="17_rfc3h"]
-[ext_resource type="PackedScene" uid="uid://coah246wohuf4" path="res://Objects/backpack/backpack.tscn" id="18_rfc3h"]
 [ext_resource type="PackedScene" uid="uid://bflvmu3vr7l36" path="res://Objects/Scrap/scrap.tscn" id="19_aot74"]
-[ext_resource type="PackedScene" uid="uid://j7jbnn5uc8ak" path="res://Objects/ShootingStar/shooting_star.tscn" id="22_rcfup"]
+[ext_resource type="PackedScene" uid="uid://byoxed237y2fg" path="res://Objects/Refinery/refinery.tscn" id="20_abo4m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ol3l7"]
 sky_top_color = Color(0.111346446, 0.10536235, 0.11134667, 1)
@@ -118,7 +116,7 @@ height = 8.86
 rings = 4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_aot74"]
-radius = 11.875973
+radius = 7.770626
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfc3h"]
 bg_color = Color(0, 0, 0, 0.30588236)
@@ -288,13 +286,6 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 light_energy = 0.685
 shadow_enabled = true
 
-[node name="Rocket" parent="." unique_id=1263267957 groups=["influencable_object"] instance=ExtResource("1_arduf")]
-transform = Transform3D(1.0000004, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000005, 1.2492412, 72.52764, 0)
-mass = 40.0
-gravity_scale = 1.0
-linear_damp_mode = 1
-angular_damp_mode = 1
-
 [node name="CameraRig" type="Node3D" parent="." unique_id=1000938322 groups=["camera_rig"]]
 script = ExtResource("4_78x0b")
 
@@ -309,13 +300,15 @@ far = 10000.0
 
 [node name="Planet-Earth5" parent="." unique_id=175257090 instance=ExtResource("6_ypcqb")]
 mass = 10000.0
+planet_seed = 552786120849998976
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="." unique_id=1859949540]
 stream = ExtResource("5_amm11")
+volume_db = -1.985
 autoplay = true
 
 [node name="Boney" parent="." unique_id=666712437 groups=["influencable_object"] instance=ExtResource("8_x7w41")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8492398, 71.60043, 5.5935574)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8492398, 70.60618, 3.634654)
 move_speed = 1.495
 
 [node name="Starfield" type="Node3D" parent="." unique_id=73669482]
@@ -330,7 +323,7 @@ mesh = SubResource("BoxMesh_yaehb")
 surface_material_override/0 = SubResource("ShaderMaterial_kvg7m")
 
 [node name="BlackHole" type="MeshInstance3D" parent="." unique_id=2079518372]
-transform = Transform3D(80.216446, -45.221706, 38.991215, 52.201443, 84.814674, -9.026344, -28.988413, 27.594595, 91.64171, 10782.443, -1178.4604, -2996.9248)
+transform = Transform3D(86.926346, -31.877348, 37.78416, 26.724363, 94.60314, 18.331657, -41.588665, -5.8374605, 90.75404, 3460.0034, 96.908714, 244.20459)
 mesh = SubResource("SphereMesh_k2xjf")
 script = ExtResource("13_q7ck0")
 
@@ -339,6 +332,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BlackHole/Area3D" unique_id=831224586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.450581e-09, -1.8626451e-09, -0.32373306)
 shape = SubResource("SphereShape3D_aot74")
 
 [node name="EasterEgg" type="Control" parent="BlackHole" unique_id=974513851]
@@ -652,14 +646,8 @@ value = 70.0
 [node name="Load" type="AnimationPlayer" parent="LoadingScreen" unique_id=1027555547]
 libraries/ = SubResource("AnimationLibrary_ojfgx")
 
-[node name="Rover" parent="." unique_id=232793370 instance=ExtResource("16_ojfgx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070694864, 71.40962, 3.4974837)
-
 [node name="DockingShip2" parent="." unique_id=1518933461 instance=ExtResource("17_rfc3h")]
 transform = Transform3D(0.9996095, 0.027956538, 0, -0.02795654, 0.99960935, 0, 0, 0, 1.0000005, -316.92267, 105.41008, 0)
-
-[node name="Backpack" parent="." unique_id=1097135241 instance=ExtResource("18_rfc3h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5112839, 70.78136, 0)
 
 [node name="Scrap" parent="." unique_id=248153912 instance=ExtResource("19_aot74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4711, 69.83674, 0)
@@ -667,8 +655,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4711, 69.83674, 0)
 [node name="Planet-Earth3" parent="." unique_id=58250303 instance=ExtResource("6_ypcqb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 396.76346, 0, 442.87854)
 
-[node name="ShootingStar" parent="." unique_id=578014890 instance=ExtResource("22_rcfup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 165.14984, -469.15057)
+[node name="Rocket" parent="." unique_id=1263267957 instance=ExtResource("1_arduf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 72.74181, 0)
+
+[node name="Refinery" parent="." unique_id=1738504274 instance=ExtResource("20_abo4m")]
+transform = Transform3D(0.99695635, -0.07760704, 0.007433257, 0.0776677, 0.9969451, -0.008252289, -0.006770117, 0.008804494, 0.9999383, -3.0536199, 70.88815, 0.010281983)
 
 [connection signal="body_entered" from="BlackHole/Area3D" to="BlackHole" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="BlackHole/Area3D" to="BlackHole" method="_on_area_3d_body_exited"]

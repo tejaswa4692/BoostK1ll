@@ -1,11 +1,11 @@
 extends Node
 @onready var player: CharacterBody3D = get_parent()
-
 var gravity_direction: Vector3 = Vector3.DOWN
 var gravity_strength: float = 0.0
 var gravity_force: Vector3 = Vector3.ZERO
 var run_val = 0.0
 var jump_val = 0.0
+var current_planet: GravitySource = null   # the dominant gravity source, i.e. the planet the player is on
 
 func update_gravity(delta: float) -> void:
 	var active_sources := GravityManager.get_active_sources(player.global_position)
@@ -14,6 +14,7 @@ func update_gravity(delta: float) -> void:
 		gravity_strength = 0.0
 		gravity_force = Vector3.ZERO
 		player.up_direction = Vector3.UP
+		current_planet = null
 		return
 	gravity_force = Vector3.ZERO
 	var strongest_source = null
@@ -37,6 +38,7 @@ func update_gravity(delta: float) -> void:
 	if gravity_force.length() > 0.001:
 		gravity_direction = gravity_force.normalized()
 		gravity_strength = gravity_force.length()
+	current_planet = strongest_source
 	if strongest_source:
 		var target_up = -(strongest_source.global_position - player.global_position).normalized()
 		player.up_direction = target_up
@@ -56,9 +58,9 @@ func handle_movement(delta: float, head: Node3D) -> void:
 		var into_floor = player.velocity.dot(-floor_normal)
 		if into_floor < 0:
 			player.velocity -= -floor_normal * into_floor
-	if Input.is_action_just_pressed("jump") and player.get_node("RayCast3D").is_colliding():
+	if Input.is_action_just_pressed("jump") and player.get_node("WalkCast").is_colliding():
 		player.velocity += -gravity_direction * player.jump_velocity
-	if player.get_node("RayCast3D").is_colliding():
+	if player.get_node("WalkCast").is_colliding():
 		jump_val = lerpf(jump_val, 0.0, 0.2)
 	else:
 		jump_val = lerpf(jump_val, 1.0, 0.2)
