@@ -19,27 +19,41 @@ func try_place(item_name: String) -> void:
 	if item_name == "observatory" and planet.has_observatory:
 		return
 	var item_data: Dictionary = Items.get_item(item_name)
-	place_and_handle(item_name, item_data.cost)
-	if item_name == "observatory":
+	var did_place: bool = place_and_handle(item_name, item_data.costs)
+	if did_place and item_name == "observatory":
 		planet.change_observatory_status()
 
-func place_and_handle(item_name: String, cost: int) -> void:
-	if player.scraps >= cost:
-		var instance = Items.items[item_name].scene.instantiate()
-		player.get_tree().root.add_child(instance)
-		var point = player.raycast.get_collision_point()
-		var normal = player.raycast.get_collision_normal()
-		instance.global_position = point
-		instance.global_basis = Basis.looking_at(normal)
-		instance.rotate_object_local(Vector3.RIGHT, deg_to_rad(-90))
-		player.scraps -= cost
-	else:
-		show_scraps_warning(cost)
+func place_and_handle(item_name: String, costs: Dictionary) -> bool:
+	if not has_enough_resources(costs):
+		show_scraps_warning(costs)
+		return false
+	var instance = Items.items[item_name].scene.instantiate()
+	player.get_tree().root.add_child(instance)
+	var point = player.raycast.get_collision_point()
+	var normal = player.raycast.get_collision_normal()
+	instance.global_position = point
+	instance.global_basis = Basis.looking_at(normal)
+	instance.rotate_object_local(Vector3.RIGHT, deg_to_rad(-90))
+	deduct_resources(costs)
+	return true
 
-func show_scraps_warning(cost: int) -> void:
+func has_enough_resources(costs: Dictionary) -> bool:
+	for resource_name: String in costs:
+		if player.get_resource_amount(resource_name) < costs[resource_name]:
+			return false
+	return true
+
+func deduct_resources(costs: Dictionary) -> void:
+	for resource_name: String in costs:
+		player.add_resource_amount(resource_name, -costs[resource_name])
+
+func show_scraps_warning(costs: Dictionary) -> void:
 	if scraps_warning_tween != null and scraps_warning_tween.is_valid():
 		scraps_warning_tween.kill()
-	player.scraps_warning.text = "need %d scraps for this action" % cost
+	var parts: Array = []
+	for resource_name: String in costs:
+		parts.append("%d %s" % [costs[resource_name], resource_name])
+	player.scraps_warning.text = "need " + ", ".join(parts) + " for this action"
 	player.scraps_warning.modulate.a = 1.0
 	player.scraps_warning.show()
 	scraps_warning_tween = player.scraps_warning.create_tween()

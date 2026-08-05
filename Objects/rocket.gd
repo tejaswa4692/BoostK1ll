@@ -9,7 +9,16 @@ var has_player: bool = false
 @onready var damage_controller = $DamageController
 @onready var help_ui_controller = $HelpUIController
 
+@onready var UpgradeStageMesh: Array = [$Rocket, $"Rocket(Stage1)", $"Rocket(Stage2)"]
+
+@export var current_stage: int = 1:
+	set(value):
+		var previous_stage: int = current_stage
+		current_stage = value
+		show_correct_stage(value, previous_stage)
+
 func _ready() -> void:
+	show_correct_stage(current_stage, -1) #-1 cuz dont know
 	CameraManager.register(self)
 	linear_damp = 0
 	gravity_scale = 0
@@ -19,10 +28,7 @@ func _ready() -> void:
 	$Control/YouDied.hide()
 	$Control/Help.hide()
 	flight_controller.setup()
-	$Rocket/AnimationPlayer.play("CubeAction_004")
-	landing_gear_controller.landing_gear = true
-	await $Rocket/AnimationPlayer.animation_finished
-	$LandingGearCollision.disabled = false
+	await landing_gear_controller.play_initial_deploy()
 
 func _on_body_entered(body: Node) -> void:
 	damage_controller.collision_impact(body)
@@ -82,3 +88,18 @@ func _on_proximity_exited(body: Node) -> void:
 
 func can_unmount() -> bool:
 	return canmove
+
+func show_correct_stage(number: int, previous_number: int = -1) -> void:
+	if UpgradeStageMesh.is_empty():
+		return
+	for i in UpgradeStageMesh:
+		i.hide()
+	UpgradeStageMesh[number].show()
+	if previous_number == -1 or previous_number == number:
+		return
+	var old_anim: AnimationPlayer = UpgradeStageMesh[previous_number].get_node("AnimationPlayer")
+	var new_anim: AnimationPlayer = UpgradeStageMesh[number].get_node("AnimationPlayer")
+	new_anim.play(old_anim.current_animation)
+	new_anim.seek(old_anim.current_animation_position, true)
+	if !old_anim.is_playing():
+		new_anim.pause()

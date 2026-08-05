@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cse4etqprbc8c"
-path="res://.godot/imported/stoneage.blend-4aed93ad42ba76904b19bc61717490ff.scn"
+uid="uid://6kqhlfaos12u"
+path="res://.godot/imported/Rocket(Stage1).blend-9393fd5c510a4062c94777adb878f391.scn"
 
 [deps]
 
-source_file="res://Assets/furnacearea/stoneage.blend"
-dest_files=["res://.godot/imported/stoneage.blend-4aed93ad42ba76904b19bc61717490ff.scn"]
+source_file="res://Assets/RocketMesh/Rocket(Stage1).blend"
+dest_files=["res://.godot/imported/Rocket(Stage1).blend-9393fd5c510a4062c94777adb878f391.scn"]
 
 [params]
 
@@ -37,25 +37,7 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"Base": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/furnacearea/Base.tres",
-"use_external/path": "uid://dskqltir3q04w"
-},
-"Fire": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/furnacearea/Fire.tres",
-"use_external/path": "uid://dpdedkcvgiew5"
-},
-"Material.002": {
-"use_external/enabled": true,
-"use_external/fallback_path": "",
-"use_external/path": ""
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

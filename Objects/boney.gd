@@ -154,3 +154,28 @@ func update_water_walk_audio() -> void:
 
 func stop_water_walk_audio() -> void:
 	water_walk.stop()
+
+
+func get_resource_amount(resource_name: String) -> int:
+	match resource_name:
+		"scraps":
+			return scraps
+		"refinedscraps":
+			return refinedscraps
+		"copper":
+			return copper
+		"iron":
+			return iron
+		_:
+			return 0
+
+func add_resource_amount(resource_name: String, amount: int) -> void:
+	match resource_name:
+		"scraps":
+			scraps += amount
+		"refinedscraps":
+			refinedscraps += amount
+		"copper":
+			copper += amount
+		"iron":
+			iron += amount

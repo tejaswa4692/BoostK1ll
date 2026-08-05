@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dpdedkcvgiew5"]
+
+[ext_resource type="Texture2D" uid="uid://cgfge3dmdrmbx" path="res://Assets/furnacearea/Fire.png" id="1_52jc0"]
+
+[resource]
+albedo_texture = ExtResource("1_52jc0")
+emission_enabled = true
+emission_energy_multiplier = 7.75
+emission_texture = ExtResource("1_52jc0")

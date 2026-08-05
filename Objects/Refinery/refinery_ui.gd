@@ -93,7 +93,6 @@ func _on_cook_timer_timeout() -> void:
 		prepared += 1
 		prepared_estimate = scrapsnum
 		set_amount = scrapsnum / returnratio()
-		print("added 1")
 		timer.start()
 	else:
 		take.disabled = false

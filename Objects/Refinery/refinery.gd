@@ -5,13 +5,11 @@ var has_player: bool = false
 var amount_prepared: int = 0
 @onready var refinery_ui: Control = $RefineryUI
 
-
 func _ready() -> void:
 	refinery_ui.hide()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact") and has_player: 
-		print("hi")
 		showhideUI()
 
 func showhideUI() -> void:

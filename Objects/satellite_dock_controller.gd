@@ -8,7 +8,8 @@ func setup_sattelite(sat_name = "Explorer I") -> void:
 	if satellite != null:
 		return
 	var sattelite_instance = satellite_scene.instantiate()
-	sattelite_instance.position = rocket.get_node("Marker3D").position
+	var marker: Marker3D = rocket.UpgradeStageMesh[rocket.current_stage].get_node("Marker3D")
+	sattelite_instance.position = rocket.to_local(marker.global_position)
 	sattelite_instance.freeze = true
 	sattelite_instance.satellite_name = sat_name
 	rocket.add_child(sattelite_instance)

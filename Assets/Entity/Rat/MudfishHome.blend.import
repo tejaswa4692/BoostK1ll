@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cse4etqprbc8c"
-path="res://.godot/imported/stoneage.blend-4aed93ad42ba76904b19bc61717490ff.scn"
+uid="uid://cvfeyuol5ll10"
+path="res://.godot/imported/MudfishHome.blend-1293b88279500143b0171ed92923b42c.scn"
 
 [deps]
 
-source_file="res://Assets/furnacearea/stoneage.blend"
-dest_files=["res://.godot/imported/stoneage.blend-4aed93ad42ba76904b19bc61717490ff.scn"]
+source_file="res://Assets/Entity/Rat/MudfishHome.blend"
+dest_files=["res://.godot/imported/MudfishHome.blend-1293b88279500143b0171ed92923b42c.scn"]
 
 [params]
 
@@ -37,25 +37,7 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"Base": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/furnacearea/Base.tres",
-"use_external/path": "uid://dskqltir3q04w"
-},
-"Fire": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/furnacearea/Fire.tres",
-"use_external/path": "uid://dpdedkcvgiew5"
-},
-"Material.002": {
-"use_external/enabled": true,
-"use_external/fallback_path": "",
-"use_external/path": ""
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

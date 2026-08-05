@@ -3,14 +3,19 @@ extends Node
 
 var landing_gear: bool = false
 
+func get_current_active_stage() -> String:
+	var currentstagename = str(rocket.UpgradeStageMesh[rocket.current_stage].name) + "/AnimationPlayer"
+	return currentstagename
+
 func play_initial_deploy() -> void:
-	rocket.get_node("Rocket/AnimationPlayer").play("CubeAction_004")
+	var anim = rocket.get_node(get_current_active_stage())
+	anim.play("CubeAction_004")
 	landing_gear = true
-	await rocket.get_node("Rocket/AnimationPlayer").animation_finished
+	await anim.animation_finished
 	rocket.get_node("LandingGearCollision").disabled = false
 
 func handle_landing_gear() -> void:
-	var anim = rocket.get_node("Rocket/AnimationPlayer")
+	var anim = rocket.get_node(get_current_active_stage())
 	if Input.is_action_just_pressed("LandingGear") and !anim.is_playing():
 		if !landing_gear:
 			anim.play("CubeAction_004")

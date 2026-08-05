@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://h4qejs56ieew"]
+
+[ext_resource type="Script" uid="uid://b50bkg2a7i0l1" path="res://Objects/Boat/boat.gd" id="1_t7ssn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j0pc3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t7ssn"]
+
+[node name="Boat" type="RigidBody3D" unique_id=1904715714]
+script = ExtResource("1_t7ssn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1412644894]
+mesh = SubResource("BoxMesh_j0pc3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=50733503]
+shape = SubResource("BoxShape3D_t7ssn")

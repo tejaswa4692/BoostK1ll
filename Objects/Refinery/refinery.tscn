@@ -3,9 +3,7 @@
 [ext_resource type="Script" uid="uid://ca4g6h6cvyu07" path="res://Objects/Refinery/refinery.gd" id="1_ivw4s"]
 [ext_resource type="Script" uid="uid://djstyy283bel7" path="res://Objects/Refinery/refinery_ui.gd" id="2_gnwwr"]
 [ext_resource type="FontFile" uid="uid://dujscdaiocpca" path="res://Assets/0xProto/0xProtoNerdFont-Regular.ttf" id="2_kx2vx"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_n7p8d"]
-size = Vector3(1, 0.125, 1)
+[ext_resource type="PackedScene" uid="uid://cse4etqprbc8c" path="res://Assets/furnacearea/stoneage.blend" id="4_qiyqb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n7p8d"]
 size = Vector3(1.2947998, 1.529541, 1.3522949)
@@ -32,18 +30,19 @@ HSlider/styles/grabber_area = SubResource("StyleBoxFlat_kx2vx")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_kx2vx")
 HSlider/styles/slider = SubResource("StyleBoxFlat_gnwwr")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qiyqb"]
+height = 1.3200684
+radius = 0.32080078
+
 [node name="Refinery" type="Node3D" unique_id=1738504274]
 script = ExtResource("1_ivw4s")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1615286538]
-mesh = SubResource("BoxMesh_n7p8d")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=2065942981]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2054835069]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042053223, -0.2647705, -0.06530762)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042053223, 0.632061, -0.06530762)
 shape = SubResource("BoxShape3D_n7p8d")
 
 [node name="RefineryUI" type="Control" parent="." unique_id=228163080]
@@ -255,6 +254,17 @@ text = "Cook"
 
 [node name="CookTimer" type="Timer" parent="RefineryUI" unique_id=1328795295]
 wait_time = 0.2
+
+[node name="stoneage" parent="." unique_id=1605125338 instance=ExtResource("4_qiyqb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.00931859, 0.014537454, 0.043265104)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1162395844]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=642839034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6636373, 0)
+shape = SubResource("CylinderShape3D_qiyqb")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

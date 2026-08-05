@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://bmcl3vw17h1nw" path="res://Objects/help_ui_controller.gd" id="13_c0aoa"]
 [ext_resource type="Script" uid="uid://b3oe0r2cf40a3" path="res://Objects/Rocket/pointer.gd" id="14_un6nu"]
 [ext_resource type="ArrayMesh" uid="uid://be6ohvktd8m7x" path="res://Assets/Arrow/Arrow.obj" id="15_qpo0r"]
+[ext_resource type="PackedScene" uid="uid://6kqhlfaos12u" path="res://Assets/RocketMesh/Rocket(Stage1).blend" id="16_4dewk"]
+[ext_resource type="PackedScene" uid="uid://dmfn5yie2wtv2" path="res://Assets/RocketMesh/Rocket(Stage2).blend" id="17_tfvph"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ijyl3"]
 height = 3.1152344
@@ -150,13 +152,11 @@ gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_ijyl3")
+current_stage = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1589436198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15137607, 2.0612031e-05)
 shape = SubResource("CylinderShape3D_ijyl3")
-
-[node name="Rocket" parent="." unique_id=362476159 instance=ExtResource("2_ijyl3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048399568, -1.6581392, -0.00036096573)
 
 [node name="LandingGearCollision" type="CollisionShape3D" parent="." unique_id=239659071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010620117, -1.4249139, -0.006713867)
@@ -397,9 +397,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2405994, 0)
 stream = ExtResource("6_a1xkk")
 volume_db = -20.0
 
-[node name="Marker3D" type="Marker3D" parent="." unique_id=895849147]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4366581, 0)
-
 [node name="ProximityArea" type="Area3D" parent="." unique_id=845502897 groups=["rocket"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24852854, 0)
 collision_layer = 3
@@ -540,6 +537,26 @@ text = "Go"
 transform = Transform3D(3.54, 0, 0, 0, -1.5473832e-07, 3.54, 0, -3.54, -1.5473832e-07, 0, 0, -1.7050214)
 mesh = ExtResource("15_qpo0r")
 surface_material_override/0 = SubResource("StandardMaterial3D_qpo0r")
+
+[node name="Rocket" parent="." unique_id=362476159 instance=ExtResource("2_ijyl3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048399568, -1.6581392, -0.00036096573)
+visible = false
+
+[node name="Marker3D" type="Marker3D" parent="Rocket" unique_id=895849147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0048399568, 3.0947974, 0.00036096573)
+
+[node name="Rocket(Stage1)" parent="." unique_id=604841767 instance=ExtResource("16_4dewk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048399568, -1.6581392, -0.00036096573)
+visible = false
+
+[node name="Marker3D" type="Marker3D" parent="Rocket(Stage1)" unique_id=442422480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0048399568, 3.2348495, 0.00036096573)
+
+[node name="Rocket(Stage2)" parent="." unique_id=1899841790 instance=ExtResource("17_tfvph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048399568, -1.6581392, -0.00036096573)
+
+[node name="Marker3D" type="Marker3D" parent="Rocket(Stage2)" unique_id=323178730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0048399568, 4.355853, 0.00036096573)
 
 [connection signal="body_entered" from="." to="." method="collision_impact"]
 [connection signal="body_entered" from="ProximityArea" to="." method="_on_proximity_entered"]

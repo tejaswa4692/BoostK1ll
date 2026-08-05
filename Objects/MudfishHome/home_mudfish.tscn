@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cvyuk2u8tvubp"]
+
+[ext_resource type="PackedScene" uid="uid://fh815frj3pji" path="res://Assets/Entity/Rat/MudfishHome.glb" id="1_hgikr"]
+[ext_resource type="Script" uid="uid://bt2dwpx66niug" path="res://Objects/MudfishHome/home_mudfish.gd" id="1_t7yjg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hgikr"]
+size = Vector3(0.60595703, 1.3847046, 0.61950684)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t7yjg"]
+radius = 1.0895424
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t7yjg"]
+height = 3.2216797
+radius = 3.5629883
+
+[node name="HomeMudfish" type="StaticBody3D" unique_id=1439608055 groups=["mudfishhome"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_t7yjg")
+
+[node name="MudfishHome" parent="." unique_id=544115790 instance=ExtResource("1_hgikr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2080631351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02709961, 0.6708069, 0.008483887)
+shape = SubResource("BoxShape3D_hgikr")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1033947497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00058597326, 0.3331337, 0.4678861)
+
+[node name="RespawnTimer" type="Timer" parent="." unique_id=1478150590]
+
+[node name="EntranceArea" type="Area3D" parent="." unique_id=295699284]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceArea" unique_id=1337715869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.047808766, 0)
+shape = SubResource("SphereShape3D_t7yjg")
+
+[node name="PlayerDetect" type="Area3D" parent="." unique_id=481586545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011607885, 0, -0.00020265579)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetect" unique_id=1093435277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5630311, 0)
+shape = SubResource("CylinderShape3D_t7yjg")
+
+[node name="SpawnRay" type="RayCast3D" parent="." unique_id=1599145541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7924423, 0)
+target_position = Vector3(0, -7.44, 0)
+
+[connection signal="body_entered" from="PlayerDetect" to="." method="_on_player_detect_body_entered"]
+[connection signal="body_exited" from="PlayerDetect" to="." method="_on_player_detect_body_exited"]
