@@ -2,6 +2,7 @@ extends RigidBody3D
 
 var canmove: bool = true
 var has_player: bool = false
+var current_player: CharacterBody3D = null
 
 @onready var flight_controller = $FlightController
 @onready var landing_gear_controller = $LandingGearController
@@ -11,7 +12,7 @@ var has_player: bool = false
 
 @onready var UpgradeStageMesh: Array = [$Rocket, $"Rocket(Stage1)", $"Rocket(Stage2)"]
 
-@export var current_stage: int = 1:
+@export var current_stage: int = 0:
 	set(value):
 		var previous_stage: int = current_stage
 		current_stage = value
@@ -103,3 +104,8 @@ func show_correct_stage(number: int, previous_number: int = -1) -> void:
 	new_anim.seek(old_anim.current_animation_position, true)
 	if !old_anim.is_playing():
 		new_anim.pause()
+
+
+func set_player(player: Node3D) -> void:
+	current_player = player
+	has_player = player != null

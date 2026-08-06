@@ -42,15 +42,15 @@ var scraps: int = 1000:
 	set(value):
 		scraps = value
 		$NormalBoneyUI/Scrapcounter.text = "Scraps: " + str(scraps)
-var refinedscraps: int = 0:
+var refinedscraps: int = 1000:
 	set(value):
 		refinedscraps = value
 		$"NormalBoneyUI/Refined Scrap".text = "Refined Scraps: " + str(refinedscraps)
-var copper: int = 0:
+var copper: int = 1000:
 	set(value):
 		copper = value
 		$NormalBoneyUI/Copper.text = "Copper: " + str(copper)
-var iron: int = 0:
+var iron: int = 1000:
 	set(value):
 		iron = value
 		$NormalBoneyUI/Iron.text = "Iron: " + str(iron)

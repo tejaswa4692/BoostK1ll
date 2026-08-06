@@ -25,14 +25,15 @@ const ACTION_RCS_RIGHT   = "rcs_right"
 const ACTION_RCS_FORWARD = "rcs_forward"
 const ACTION_RCS_BACK    = "rcs_back"
 
-var fuel = 5000
+var fuel = 2500
+var max_fuel = 2500
 var current_bias: float = 0.0
 
 @onready var RCS_Thrusters_left = [rocket.get_node("RCS-Left/RCS-back"), rocket.get_node("RCS-Left/RCS-Down"), rocket.get_node("RCS-Left/RCS-forward"), rocket.get_node("RCS-Left/RCS-Up"), rocket.get_node("RCS-Left/RCS-left"), rocket.get_node("RCS-Left/RCS-right")]
 @onready var RCS_Thrusters_right = [rocket.get_node("RCS-Right/RCS-back"), rocket.get_node("RCS-Right/RCS-Down"), rocket.get_node("RCS-Right/RCS-forward"), rocket.get_node("RCS-Right/RCS-Up"), rocket.get_node("RCS-Right/RCS-left"), rocket.get_node("RCS-Right/RCS-right")]
 
 func setup() -> void:
-	fuel_guage.max_value = fuel
+	fuel_guage.max_value = max_fuel
 	fuel_guage.value = fuel
 	set_thrust_gradient_bias(throttleslider.value)
 	for i in RCS_Thrusters_left:

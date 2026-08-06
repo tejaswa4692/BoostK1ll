@@ -19,6 +19,12 @@ var items: Dictionary = {
 		"description": "A station that can be used for scrap refinery",
 		"costs": {"iron": 10, "copper": 2},
 	},
+	"UpgradeStation": {
+		"scene": preload("res://Objects/UpgradeStation/upgrade_station.tscn"),
+		"icon": preload("res://icon.svg"),
+		"description": "An upgrade station to buy rocket upgrades, quiet handy ngl",
+		"costs": {"iron": 5, "copper": 20},
+	}
 }
 
 func get_item(item_name: String) -> Dictionary:

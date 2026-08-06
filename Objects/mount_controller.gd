@@ -16,6 +16,7 @@ func do_mount(target) -> void:
 		return
 	if player.mounted_target != null and is_instance_valid(player.mounted_target):
 		player.mounted_target.has_player = false
+		player.mounted_target.current_player = null
 	player.is_mounted = true
 	player.mounted_target = target
 	player.stop_water_walk_audio()
@@ -26,6 +27,7 @@ func do_mount(target) -> void:
 	player.get_tree().get_first_node_in_group("camera_rig").activate()
 	CameraManager.override_target = target
 	target.has_player = true
+	target.current_player = player
 	if GraphicsSettings.showkeybinds:
 		player.get_node("Help").hide()
 
@@ -41,6 +43,7 @@ func unmount() -> void:
 			player.global_position = player.mount_source.global_position + player.mount_source.global_transform.basis.x * 3.0
 	if player.mounted_target:
 		player.mounted_target.has_player = false
+		player.mounted_target.current_player = null
 	player.mounted_target = null
 	player.mount_source = null
 	player.velocity = Vector3.ZERO

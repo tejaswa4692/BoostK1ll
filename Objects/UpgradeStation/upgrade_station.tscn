@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://sknan5ai7v4m"]
+
+[ext_resource type="Script" uid="uid://bn4mdkt6s56dk" path="res://Objects/UpgradeStation/upgrade_station.gd" id="1_758ek"]
+[ext_resource type="Texture2D" uid="uid://bcgrbyekmkaha" path="res://Assets/upgradeimages/Stage1Image.png" id="2_pko4o"]
+[ext_resource type="FontFile" uid="uid://dujscdaiocpca" path="res://Assets/0xProto/0xProtoNerdFont-Regular.ttf" id="3_xph8s"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3vl8h"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_758ek"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3vl8h"]
+size = Vector3(1, 2.531433, 1)
+
+[node name="UpgradeStation" type="StaticBody3D" unique_id=1514566262]
+script = ExtResource("1_758ek")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1600496882]
+mesh = SubResource("BoxMesh_3vl8h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=402400213]
+shape = SubResource("BoxShape3D_758ek")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=842789405]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=710388714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.237901, 0)
+shape = SubResource("BoxShape3D_3vl8h")
+
+[node name="UpgradeMenu" type="Control" parent="." unique_id=782832528]
+visible = false
+layout_mode = 3
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UpgradeMenu" unique_id=171596182]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="TextureRect" parent="UpgradeMenu" unique_id=568748919]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.042000003
+anchor_right = 0.563
+anchor_bottom = 0.629
+offset_left = 0.19359493
+offset_top = 0.07039261
+offset_right = -0.030395508
+offset_bottom = -0.15522766
+texture = ExtResource("2_pko4o")
+expand_mode = 1
+
+[node name="Description" type="RichTextLabel" parent="UpgradeMenu" unique_id=373546389]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.59300005
+anchor_top = 0.034
+anchor_right = 0.96900004
+anchor_bottom = 0.96300006
+offset_left = 0.14559937
+offset_top = 0.18079281
+offset_right = -0.11517334
+offset_bottom = -0.014434814
+theme_override_fonts/normal_font = ExtResource("3_xph8s")
+theme_override_font_sizes/normal_font_size = 20
+text = "Hi"
+
+[node name="Price" type="Label" parent="UpgradeMenu" unique_id=1492266452]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.038000003
+anchor_top = 0.65400004
+anchor_right = 0.563
+anchor_bottom = 0.85200006
+offset_left = -0.11040497
+offset_top = 0.12477112
+offset_right = -0.030395508
+offset_bottom = 0.1423645
+theme_override_fonts/font = ExtResource("3_xph8s")
+theme_override_font_sizes/font_size = 13
+text = "scraps -> 200
+refined_scraps -> 0
+copper -> 0
+iron -> 0"
+
+[node name="Button" type="Button" parent="UpgradeMenu" unique_id=726248921]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.86300004
+anchor_right = 0.45700002
+anchor_bottom = 0.96800005
+offset_left = 0.79999924
+offset_top = -0.13442993
+offset_right = -0.18559265
+offset_bottom = 0.04156494
+text = "Buy "
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="pressed" from="UpgradeMenu/Button" to="." method="_on_buy_pressed"]

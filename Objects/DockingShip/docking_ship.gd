@@ -9,7 +9,7 @@ var rocket: RigidBody3D = null
 @export var dock_speed: float = 1.0
 @export var dock_distance_threshold: float = 0.02
 
-#FIX THE R BUG WHERE ITS STILL FROZEN WHEN R IS PRESSED
+#FIX THE R BUG WHERE ITS STILL FROZEN WHEN R IS PRESSED: Fixed
 
 func _ready() -> void:
 	$MotherShip/AnimationPlayer.play_backwards("Grab")

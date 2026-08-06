@@ -45,8 +45,8 @@ func dock_satellite_on_rocket(satname: String) -> void:
 
 func pleaserefuel() -> void:
 	if rocket != null:
-		rocket.flight_controller.fuel = 5000 #HERE TO CHANGE FUEL DONT FORGET IT LATER
-		rocket.flight_controller.fuel_guage.value = 5000
+		rocket.flight_controller.fuel = rocket.flight_controller.max_fuel #HERE TO CHANGE FUEL DONT FORGET IT LATER
+		rocket.flight_controller.fuel_guage.value = rocket.flight_controller.fuel
 
 
 func spawn_vehicle_rover() -> void:
