@@ -13,7 +13,7 @@ config_version=5
 config/name="Into-The-Cosmos"
 run/main_scene="uid://djq7ix01l6ome"
 config/features=PackedStringArray("4.6", "Forward Plus")
-boot_splash/image="uid://1vqgfucuwmwt"
+boot_splash/image="uid://cchpar6oq1bu7"
 config/icon="uid://bxnrivd8fmhi"
 
 [autoload]
