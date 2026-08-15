@@ -9,8 +9,11 @@ var current_player: CharacterBody3D = null
 @onready var satellite_dock_controller = $SatelliteDockController
 @onready var damage_controller = $DamageController
 @onready var help_ui_controller = $HelpUIController
+@onready var show_key_tip: RichTextLabel = $ShowKeyTip
+@onready var upgrade_clouds: Node3D = $UpgradeClouds
 
-@onready var UpgradeStageMesh: Array = [$Rocket, $"Rocket(Stage1)", $"Rocket(Stage2)"]
+
+@onready var UpgradeStageMesh: Array = [$Rocket, $"Rocket(Stage1)", $"Rocket(Stage2)"] 
 
 @export var current_stage: int = 0:
 	set(value):
@@ -19,6 +22,7 @@ var current_player: CharacterBody3D = null
 		show_correct_stage(value, previous_stage)
 
 func _ready() -> void:
+	show_key_tip.hide()
 	show_correct_stage(current_stage, -1) #-1 cuz dont know
 	CameraManager.register(self)
 	linear_damp = 0
@@ -88,6 +92,7 @@ func _on_proximity_exited(body: Node) -> void:
 		body.set_nearest_rocket(null)
 
 func can_unmount() -> bool:
+	show_key_tip.hide()
 	return canmove
 
 func show_correct_stage(number: int, previous_number: int = -1) -> void:
@@ -95,12 +100,18 @@ func show_correct_stage(number: int, previous_number: int = -1) -> void:
 		return
 	for i in UpgradeStageMesh:
 		i.hide()
-	UpgradeStageMesh[number].show()
+	UpgradeStageMesh[number].show() 
+	
+	
 	if previous_number == -1 or previous_number == number:
 		return
+	
 	var old_anim: AnimationPlayer = UpgradeStageMesh[previous_number].get_node("AnimationPlayer")
 	var new_anim: AnimationPlayer = UpgradeStageMesh[number].get_node("AnimationPlayer")
-	new_anim.play(old_anim.current_animation)
+	print(old_anim)
+	print(new_anim)
+	
+	new_anim.play("CubeAction_004") 
 	new_anim.seek(old_anim.current_animation_position, true)
 	if !old_anim.is_playing():
 		new_anim.pause()

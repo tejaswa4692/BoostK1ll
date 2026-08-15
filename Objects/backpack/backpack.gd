@@ -8,11 +8,13 @@ var has_player: bool = false
 @onready var item_list: ItemList = $Control/ItemList
 const ICON_PATH := "res://Assets/InventoryIcons/%s.png"
 var _icon_cache: Dictionary = {}
+@onready var key_tip: Sprite3D = $KeyTip
 
 @onready var animationplayer = $BoxPlayer
 
 
 func _ready() -> void:
+	key_tip.hide()
 	animationplayer.play("CloseNew")
 	item_list.icon_mode = ItemList.ICON_MODE_TOP
 	item_list.fixed_icon_size = Vector2i(250, 250)   # match whatever your hotbar uses
@@ -101,10 +103,12 @@ func try_stash(item_name: String) -> bool:
 func _on_body_entered(body: Node3D) -> void:
 	if body.has_method("set_nearest_backpack"):
 		body.set_nearest_backpack(self)
+		key_tip.show()
 
 func _on_body_exited(body: Node3D) -> void:
 	if body.has_method("set_nearest_backpack") and body.nearest_backpack == self:
 		body.set_nearest_backpack(null)
+		key_tip.hide()
 
 
 

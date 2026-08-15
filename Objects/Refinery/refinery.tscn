@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://djstyy283bel7" path="res://Objects/Refinery/refinery_ui.gd" id="2_gnwwr"]
 [ext_resource type="FontFile" uid="uid://dujscdaiocpca" path="res://Assets/0xProto/0xProtoNerdFont-Regular.ttf" id="2_kx2vx"]
 [ext_resource type="PackedScene" uid="uid://cse4etqprbc8c" path="res://Assets/furnacearea/stoneage.blend" id="4_qiyqb"]
+[ext_resource type="Texture2D" uid="uid://o5bk6kukwc0x" path="res://Objects/backpack/Group 14(2).png" id="4_wgy8j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n7p8d"]
 size = Vector3(1.2947998, 1.529541, 1.3522949)
@@ -182,20 +183,6 @@ item_0/text = "Refined scrap"
 item_1/text = "Copper"
 item_2/text = "Iron"
 
-[node name="TimerVisualiser" type="HSlider" parent="RefineryUI" unique_id=780914212]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.027
-anchor_top = 0.5
-anchor_right = 0.43100002
-anchor_bottom = 0.52500004
-theme = SubResource("Theme_gnwwr")
-max_value = 1.0
-step = 0.01
-value = 0.3
-editable = false
-scrollable = false
-
 [node name="Take" type="Button" parent="RefineryUI" unique_id=922044605]
 layout_mode = 1
 anchors_preset = -1
@@ -265,6 +252,11 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=642839034]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6636373, 0)
 shape = SubResource("CylinderShape3D_qiyqb")
+
+[node name="KeyTip" type="Sprite3D" parent="." unique_id=1879117130]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.38613993, 0.45722187, 0.037167117)
+billboard = 1
+texture = ExtResource("4_wgy8j")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

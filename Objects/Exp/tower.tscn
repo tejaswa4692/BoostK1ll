@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://u80nn6mar66w"]
+
+[ext_resource type="Script" uid="uid://d37f3owtjp8rn" path="res://Objects/Exp/tower.gd" id="1_job5v"]
+[ext_resource type="PackedScene" uid="uid://bceu6n84qelnm" path="res://Assets/ElectricPole/ElectricPole.blend" id="2_krb08"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8ysvm"]
+data = PackedVector3Array(-0.099999994, 2.5249999, 0.099999994, 0.099999994, 2.5249999, 0.099999994, -0.099999994, -2.5249999, 0.099999994, 0.099999994, 2.5249999, 0.099999994, 0.099999994, -2.5249999, 0.099999994, -0.099999994, -2.5249999, 0.099999994, 0.099999994, 2.5249999, -0.099999994, -0.099999994, 2.5249999, -0.099999994, 0.099999994, -2.5249999, -0.099999994, -0.099999994, 2.5249999, -0.099999994, -0.099999994, -2.5249999, -0.099999994, 0.099999994, -2.5249999, -0.099999994, 0.099999994, 2.5249999, 0.099999994, 0.099999994, 2.5249999, -0.099999994, 0.099999994, -2.5249999, 0.099999994, 0.099999994, 2.5249999, -0.099999994, 0.099999994, -2.5249999, -0.099999994, 0.099999994, -2.5249999, 0.099999994, -0.099999994, 2.5249999, -0.099999994, -0.099999994, 2.5249999, 0.099999994, -0.099999994, -2.5249999, -0.099999994, -0.099999994, 2.5249999, 0.099999994, -0.099999994, -2.5249999, 0.099999994, -0.099999994, -2.5249999, -0.099999994, 0.099999994, 2.5249999, 0.099999994, -0.099999994, 2.5249999, 0.099999994, 0.099999994, 2.5249999, -0.099999994, -0.099999994, 2.5249999, 0.099999994, -0.099999994, 2.5249999, -0.099999994, 0.099999994, 2.5249999, -0.099999994, -0.099999994, -2.5249999, 0.099999994, 0.099999994, -2.5249999, 0.099999994, -0.099999994, -2.5249999, -0.099999994, 0.099999994, -2.5249999, 0.099999994, 0.099999994, -2.5249999, -0.099999994, -0.099999994, -2.5249999, -0.099999994)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8ysvm"]
+height = 6.0566406
+radius = 13.20752
+
+[node name="Tower" type="StaticBody3D" unique_id=2010316960 groups=["tower"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_job5v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1092619522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5033345, 0)
+shape = SubResource("ConcavePolygonShape3D_8ysvm")
+
+[node name="LocationToConnectWireTo" type="Marker3D" parent="." unique_id=1920197974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.3818603, 0)
+
+[node name="TowerDistance" type="Area3D" parent="." unique_id=1576464483]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TowerDistance" unique_id=1768608514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6591797, 0)
+shape = SubResource("CylinderShape3D_8ysvm")
+
+[node name="ElectricPole" parent="." unique_id=873869150 instance=ExtResource("2_krb08")]
+
+[connection signal="body_entered" from="TowerDistance" to="." method="_on_tower_distance_body_entered"]

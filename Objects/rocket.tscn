@@ -17,6 +17,7 @@
 [ext_resource type="ArrayMesh" uid="uid://be6ohvktd8m7x" path="res://Assets/Arrow/Arrow.obj" id="15_qpo0r"]
 [ext_resource type="PackedScene" uid="uid://6kqhlfaos12u" path="res://Assets/RocketMesh/Rocket(Stage1).blend" id="16_4dewk"]
 [ext_resource type="PackedScene" uid="uid://dmfn5yie2wtv2" path="res://Assets/RocketMesh/Rocket(Stage2).blend" id="17_tfvph"]
+[ext_resource type="PackedScene" uid="uid://cgq3j60rqpopk" path="res://Objects/Rocket/upgrade_clouds.tscn" id="18_nsva3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ijyl3"]
 height = 3.1152344
@@ -207,7 +208,7 @@ Press F to release the satellite
 press J for landing gear
 Press left mouse for throttle
 Scroll up and down for selecting throttle level
- "
+Press Z to openclose rocket upgrade menu (only opens when rocket is on upgrade pad)"
 
 [node name="Control" type="Control" parent="." unique_id=1946425534]
 visible = false
@@ -556,6 +557,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048399568, -1.6581392, -0
 
 [node name="Marker3D" type="Marker3D" parent="Rocket(Stage2)" unique_id=323178730]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0048399568, 4.355853, 0.00036096573)
+
+[node name="ShowKeyTip" type="RichTextLabel" parent="." unique_id=1160024009]
+anchors_preset = -1
+anchor_top = 0.147
+anchor_right = 1.0
+anchor_bottom = 0.23600002
+offset_top = -0.2559967
+offset_bottom = 0.07199097
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.3882353, 0.83137256, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_567k3")
+theme_override_font_sizes/normal_font_size = 39
+text = "Press Z"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="UpgradeClouds" parent="." unique_id=118325370 instance=ExtResource("18_nsva3")]
 
 [connection signal="body_entered" from="." to="." method="collision_impact"]
 [connection signal="body_entered" from="ProximityArea" to="." method="_on_proximity_entered"]

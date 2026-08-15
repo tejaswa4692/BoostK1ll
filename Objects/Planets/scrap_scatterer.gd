@@ -7,6 +7,7 @@ class_name PlanetScrapScatterer
 @export var max_scale: float = 1.5
 @export var surface_offset: float = 0.05 # small offset above the surface so scrap doesn't z-fight/clip into terrain
 @export var auto_generate_on_ready: bool = true
+@export var seed_offset: int = 777 # give each scatterer node a different value so RNG sequences don't overlap
 
 var _rng := RandomNumberGenerator.new()
 var _is_generating := false
@@ -41,7 +42,7 @@ func regenerate() -> void:
 	# Offset the seed from the planet's own seed so scrap placement doesn't
 	# accidentally correlate with rock placement or surface material randomization
 	var seed_source: int = _planet.planet_seed if (_planet and "planet_seed" in _planet) else randi()
-	_rng.seed = seed_source + 777
+	_rng.seed = seed_source + seed_offset
 
 	for i in range(scrap_count):
 		_spawn_one(radius)

@@ -23,7 +23,7 @@ var has_player: bool = false:
 			engine_force = 0.0
 			steering = 0.0
 			brake = 1.0
-
+var current_player = null
 var gravity_direction: Vector3 = Vector3.DOWN
 var gravity_strength: float = 0.0
 var gravity_force: Vector3 = Vector3.ZERO
@@ -89,7 +89,7 @@ func handle_mudguards() -> void:
 	MudguardFrontLeft.transform.basis = Basis().rotated(Vector3.UP, wheel_steering_angle)
 
 
-func _update_gravity(state: PhysicsDirectBodyState3D) -> void:
+func _update_gravity(_state: PhysicsDirectBodyState3D) -> void:
 	var active_sources := GravityManager.get_active_sources(global_position)
 	if active_sources.is_empty():
 		gravity_direction = Vector3.DOWN

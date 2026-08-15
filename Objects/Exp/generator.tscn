@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bruv0lf3y2vq6"]
+
+[ext_resource type="Script" uid="uid://dv2q5a6ndefhv" path="res://Objects/Exp/generator.gd" id="1_xxcu2"]
+[ext_resource type="PackedScene" uid="uid://c2ged8m6qg563" path="res://Assets/ElectricPole/Generrator.blend" id="2_fmw1g"]
+[ext_resource type="AudioStream" uid="uid://d31y8a044th3y" path="res://Assets/ElectricPole/GeneratorHumm.mp3" id="3_7tics"]
+[ext_resource type="AudioStream" uid="uid://ctg5orcofrdqp" path="res://Assets/ElectricPole/layer2sound.mp3" id="4_7tics"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7tics"]
+height = 1.0170898
+radius = 0.41845703
+
+[node name="Generator" type="StaticBody3D" unique_id=1460418343 groups=["generator"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_xxcu2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1196053660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49145508, 0)
+shape = SubResource("CylinderShape3D_7tics")
+
+[node name="location_to_connect_wire_to" type="Marker3D" parent="." unique_id=1943628049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016463399, 1.2973583, 0)
+
+[node name="Generrator" parent="." unique_id=271852956 instance=ExtResource("2_fmw1g")]
+
+[node name="GeneratorHumm" type="AudioStreamPlayer3D" parent="." unique_id=1055081529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5816393, 0)
+stream = ExtResource("3_7tics")
+volume_db = 80.0
+unit_size = 108.9
+max_db = 6.0
+autoplay = true
+max_distance = 10.0
+
+[node name="Layer2Sound" type="AudioStreamPlayer3D" parent="." unique_id=221310243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5816393, 0)
+stream = ExtResource("4_7tics")
+volume_db = 80.0
+unit_size = 50.9
+max_db = 6.0
+autoplay = true
+max_distance = 10.0
+attenuation_filter_cutoff_hz = 20500.0

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bfodia367a068" path="res://Objects/backpack/backpack.gd" id="1_qtih8"]
 [ext_resource type="Texture2D" uid="uid://brhmqwt3srrql" path="res://Assets/InventoryIcons/observatory.png" id="2_83a4k"]
+[ext_resource type="Texture2D" uid="uid://o5bk6kukwc0x" path="res://Objects/backpack/Group 14(2).png" id="3_w3rb4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3rb4"]
 content_margin_left = 4.0
@@ -254,11 +255,16 @@ transform = Transform3D(0.24865253, 0, 0, 0, 0.24865253, 0, 0, 0, 0.24865253, -0
 mesh = SubResource("ArrayMesh_83a4k")
 
 [node name="Cube_001" type="MeshInstance3D" parent="." unique_id=542954348]
-transform = Transform3D(-0.24865252, -3.77488e-08, 7.6848444e-08, 3.7545355e-08, -0.24865161, -0.00065785943, 7.694806e-08, -0.0006578595, 0.2486516, -0.3524907, 0.33815813, 0)
+transform = Transform3D(0.07622107, 0.23668125, 0.0006261341, -0.2366821, 0.07622078, 0.00020168755, 4.5142787e-08, -0.000657816, 0.24865158, -0.3524907, 0.33815813, 0)
 mesh = SubResource("ArrayMesh_w3rb4")
 
 [node name="BoxPlayer" type="AnimationPlayer" parent="." unique_id=169807627]
 libraries/ = SubResource("AnimationLibrary_kik2b")
+
+[node name="KeyTip" type="Sprite3D" parent="." unique_id=1946462601]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.08560248, 0.6216737, 0)
+billboard = 1
+texture = ExtResource("3_w3rb4")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_body_exited"]

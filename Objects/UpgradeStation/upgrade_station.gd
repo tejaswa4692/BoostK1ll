@@ -6,8 +6,13 @@ var rocket_scene = null
 @onready var image: TextureRect = $UpgradeMenu/Image
 @onready var descBlock: RichTextLabel = $UpgradeMenu/Description
 @onready var price: Label = $UpgradeMenu/Price
-
+@onready var location_to_connect_wire_to: Marker3D = $location_to_connect_wire_to
+var connected: bool = false
+var has_electricity_running: bool = false
 var current_stage_to_buy: int = 0
+@onready var electricityalert: Control = $ElectricityNotHere
+@onready var show_key_tip: RichTextLabel = $ShowKeyTip
+@onready var electric_sounds: AudioStreamPlayer3D = $ElectricSounds
 
 var description = {
 	0: {
@@ -31,6 +36,11 @@ var description = {
 		"image": "res://Assets/upgradeimages/Stage2Image.png"
 	}
 }
+
+func _ready() -> void:
+	electric_sounds.play()
+	$RocketUpgradeStation/AnimationPlayer.play("TorusAction")
+	$RocketUpgradeStation/AnimationPlayer.speed_scale = 0.3
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -86,7 +96,10 @@ func buy() -> void:
 	rocket_scene.flight_controller.max_fuel += 2500
 	rocket_scene.flight_controller.fuel_guage.max_value = rocket_scene.flight_controller.max_fuel
 	rocket_scene.flight_controller.fuel_guage.value = rocket_scene.flight_controller.fuel
+	rocket_scene.upgrade_clouds.upgradecloudsemit()
+	rocket_scene.flight_controller.thrust_force += 100
 	current_stage_to_buy += 1
+	
 	updateDetails()
 
 func updateDetails() -> void:
@@ -104,23 +117,30 @@ func updateDetails() -> void:
 	image.texture = load(description[current_stage_to_buy]["image"])
 
 func openclosemenu() -> void:
-	if upgrade_menu.visible:
+	if upgrade_menu.visible or electricityalert.visible:
 		upgrade_menu.hide()
+		electricityalert.hide()
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
-		upgrade_menu.show()
-		updateDetails()
+		if has_electricity_running:
+			upgrade_menu.show()
+			updateDetails()
+		else:
+			electricityalert.show()
+			updateDetails()
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("rocket"):
+		body.show_key_tip.show()
 		rocket_in = true
 		rocket_scene = body
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("rocket"):
+		body.show_key_tip.hide()
 		rocket_in = false
 		rocket_scene = null
 

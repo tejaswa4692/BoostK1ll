@@ -15,15 +15,27 @@ var items: Dictionary = {
 	},
 	"ToolStation": {
 		"scene": preload("res://Objects/Refinery/refinery.tscn"),
-		"icon": preload("res://icon.svg"),
+		"icon": preload("res://Assets/InventoryIcons/Furnace.png"),
 		"description": "A station that can be used for scrap refinery",
-		"costs": {"iron": 10, "copper": 2},
+		"costs": {"scraps": 20},
 	},
 	"UpgradeStation": {
 		"scene": preload("res://Objects/UpgradeStation/upgrade_station.tscn"),
-		"icon": preload("res://icon.svg"),
+		"icon": preload("res://Assets/InventoryIcons/RocketUpgradeStation.png"),
 		"description": "An upgrade station to buy rocket upgrades, quiet handy ngl",
 		"costs": {"iron": 5, "copper": 20},
+	},
+	"Tower": {
+		"scene": preload("res://Objects/Exp/tower.tscn"),
+		"icon": preload("res://Assets/InventoryIcons/tower.png"),
+		"description": "An electric pole",
+		"costs": {"scraps": 5},
+	},
+	"Generator": {
+		"scene": preload("res://Objects/Exp/generator.tscn"),
+		"icon": preload("res://Assets/InventoryIcons/generator.png"),
+		"description": "A 50kW generator",
+		"costs": {"scraps": 20},
 	}
 }
 

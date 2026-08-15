@@ -3,29 +3,36 @@
 [ext_resource type="Script" uid="uid://bn4mdkt6s56dk" path="res://Objects/UpgradeStation/upgrade_station.gd" id="1_758ek"]
 [ext_resource type="Texture2D" uid="uid://bcgrbyekmkaha" path="res://Assets/upgradeimages/Stage1Image.png" id="2_pko4o"]
 [ext_resource type="FontFile" uid="uid://dujscdaiocpca" path="res://Assets/0xProto/0xProtoNerdFont-Regular.ttf" id="3_xph8s"]
+[ext_resource type="AudioStream" uid="uid://creocejls6c1c" path="res://Assets/RocketUpgradeStation/ElectricSparks.mp3" id="4_ucbuk"]
+[ext_resource type="PackedScene" uid="uid://ctseoi82kqq1t" path="res://Assets/RocketUpgradeStation/RocketUpgradeStation.glb" id="5_x2w2k"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_3vl8h"]
-size = Vector3(1, 0.2, 1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ygryo"]
+height = 0.74853516
+radius = 1.5126953
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_758ek"]
-size = Vector3(1, 0.2, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ygryo"]
+size = Vector3(0.4897461, 2.647583, 0.47607422)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3vl8h"]
-size = Vector3(1, 2.531433, 1)
+size = Vector3(2.9956055, 2.531433, 2.9733887)
 
-[node name="UpgradeStation" type="StaticBody3D" unique_id=1514566262]
+[node name="UpgradeStation" type="StaticBody3D" unique_id=1514566262 groups=["electrical_appliance"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_758ek")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1600496882]
-mesh = SubResource("BoxMesh_3vl8h")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=402400213]
-shape = SubResource("BoxShape3D_758ek")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022216797, 0)
+shape = SubResource("CylinderShape3D_ygryo")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=959234159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2622235, 0.8460083, 0.00024414063)
+shape = SubResource("BoxShape3D_ygryo")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=842789405]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=710388714]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.237901, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008544922, 1.237901, 0.0037841797)
 shape = SubResource("BoxShape3D_3vl8h")
 
 [node name="UpgradeMenu" type="Control" parent="." unique_id=782832528]
@@ -105,6 +112,50 @@ offset_top = -0.13442993
 offset_right = -0.18559265
 offset_bottom = 0.04156494
 text = "Buy "
+
+[node name="ElectricityNotHere" type="Control" parent="." unique_id=1180424880]
+visible = false
+layout_mode = 3
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="ElectricityNotHere" unique_id=79976114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ElectricityNotHere" unique_id=1909285390]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_xph8s")
+theme_override_font_sizes/normal_font_size = 26
+text = "Electricity Not Connected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="location_to_connect_wire_to" type="Marker3D" parent="." unique_id=1230405167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2371426, 1.4122744, 0)
+
+[node name="ElectricSounds" type="AudioStreamPlayer3D" parent="." unique_id=354862874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.32385, 1.5038903, 0.032886207)
+stream = ExtResource("4_ucbuk")
+volume_db = 17.28
+autoplay = true
+max_distance = 4.9
+
+[node name="RocketUpgradeStation" parent="." unique_id=855685231 instance=ExtResource("5_x2w2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0079813, -0.012224674, 0.004625559)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

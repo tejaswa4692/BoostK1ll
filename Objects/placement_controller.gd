@@ -31,9 +31,15 @@ func place_and_handle(item_name: String, costs: Dictionary) -> bool:
 	player.get_tree().root.add_child(instance)
 	var point = player.raycast.get_collision_point()
 	var normal = player.raycast.get_collision_normal()
+
+	var forward: Vector3 = -player.global_basis.z
+	forward = forward - forward.project(normal)
+	if forward.length_squared() < 0.0001:
+		forward = player.global_basis.x - player.global_basis.x.project(normal)
+	forward = forward.normalized()
+
 	instance.global_position = point
-	instance.global_basis = Basis.looking_at(normal)
-	instance.rotate_object_local(Vector3.RIGHT, deg_to_rad(-90))
+	instance.global_basis = Basis.looking_at(forward, normal)
 	deduct_resources(costs)
 	return true
 

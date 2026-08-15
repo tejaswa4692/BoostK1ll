@@ -38,19 +38,19 @@ var nearest_rocket = null
 var nearest_backpack: Backpack = null
 var open_backpack: Backpack = null
 var pitch: float = 0.0
-var scraps: int = 1000:
+var scraps: int = 0:
 	set(value):
 		scraps = value
 		$NormalBoneyUI/Scrapcounter.text = "Scraps: " + str(scraps)
-var refinedscraps: int = 1000:
+var refinedscraps: int = 0:
 	set(value):
 		refinedscraps = value
 		$"NormalBoneyUI/Refined Scrap".text = "Refined Scraps: " + str(refinedscraps)
-var copper: int = 1000:
+var copper: int = 0:
 	set(value):
 		copper = value
 		$NormalBoneyUI/Copper.text = "Copper: " + str(copper)
-var iron: int = 1000:
+var iron: int = 0:
 	set(value):
 		iron = value
 		$NormalBoneyUI/Iron.text = "Iron: " + str(iron)
@@ -59,6 +59,10 @@ var water_walk_active: bool = false
 
 
 func _ready() -> void:
+	scraps = 1000
+	refinedscraps = 1000
+	copper = 1000
+	iron = 1000
 	scraps_warning.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true

@@ -31,10 +31,6 @@ Items="*uid://cdu2c1cy3s4ad"
 window/size/mode=2
 window/stretch/mode="canvas_items"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
-
 [file_customization]
 
 folder_colors={
@@ -46,6 +42,7 @@ folder_colors={
 [global_group]
 
 satellites=""
+electrical_appliance=""
 
 [input]
 

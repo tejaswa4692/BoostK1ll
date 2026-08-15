@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-var scrap_quantity: int = 5
+var scrap_quantity: int = 20
 
 func remove() -> void:
 	$GPUParticles3D.emitting = true
