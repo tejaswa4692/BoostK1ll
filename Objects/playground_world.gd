@@ -5,7 +5,7 @@ extends Node3D
 @onready var render_scale: OptionButton = $Settings2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer5/renderscale
 @onready var settings: Control = $Settings2
 @onready var player = $Boney
-
+var current_player 
 
 func _ready() -> void:
 	$LoadingScreen.show()

@@ -190,10 +190,10 @@ text = " to open help press H (important)"
 [node name="RichTextLabel" type="RichTextLabel" parent="Help" unique_id=1630913465]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.01
-anchor_top = 0.02
+anchor_left = 0.010000001
+anchor_top = 0.063
 anchor_right = 0.03
-anchor_bottom = 0.1
+anchor_bottom = 0.163
 offset_right = 356.44
 offset_bottom = 241.2
 theme_override_colors/default_color = Color(0.38863307, 0.83022666, 3.85046e-07, 1)
@@ -202,6 +202,7 @@ theme_override_font_sizes/normal_font_size = 12
 text = "Press Esc to open pause menu
 Press R to reset the player and rocket position
 press WASD to move
+Q/E to rotate the rocket
 Press Shift + WASD to use RCS
 Press C to unmount/spacewalk
 Press F to release the satellite 

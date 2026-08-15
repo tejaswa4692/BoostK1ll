@@ -582,9 +582,9 @@ theme_override_font_sizes/normal_font_size = 12
 text = "Press Esc to open pause menu
 Press R to reset the player and rocket position
 press WASD to move
-Press LMB to place an item in your inventory
 Press C to mount an object 
-Press B to open close build menu"
+Press B to open close build menu
+(fun fact: some planets have water if ur not lucky enough to spawn on one expore and find out)"
 
 [node name="HeadCast" type="RayCast3D" parent="." unique_id=1887353501]
 transform = Transform3D(1, 0, 0, 0, 0.31687433, 0.94846755, 0, -0.94846755, 0.31687433, 0, 1.6642196, -1.9033561)
@@ -735,21 +735,21 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, -0.022641242, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, -0.022641242, 0)
-bones/0/rotation = Quaternion(-0.028389625, 1.112118e-07, -6.9335573e-09, 0.99959695)
+bones/0/rotation = Quaternion(-0.0327274, 1.1124475e-07, 1.2826177e-09, 0.9994644)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23699029, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.23699029, 0)
-bones/1/rotation = Quaternion(0.026820181, -5.2753945e-05, -0.00079089636, 0.99964005)
+bones/1/rotation = Quaternion(0.031158166, -4.93212e-05, -0.00079112523, 0.9995142)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "LeftHand"
 bones/2/parent = 0
 bones/2/rest = Transform3D(-0.9319116, -0.36268908, -2.1853853e-07, 0.36268958, -0.9319103, 1.2662169e-07, -2.4958297e-07, 3.8738506e-08, 1, -0.123382494, 0.2129689, -2.6189195e-08)
 bones/2/enabled = true
 bones/2/position = Vector3(-0.123382494, 0.2129689, -2.6189195e-08)
-bones/2/rotation = Quaternion(-0.115644485, -0.0838986, 0.9709038, 0.19218013)
+bones/2/rotation = Quaternion(-0.115472846, -0.08312153, 0.9699315, 0.19745867)
 bones/2/scale = Vector3(1.0000014, 1, 1)
 bones/3/name = "LeftHand.001"
 bones/3/parent = 2
@@ -763,7 +763,7 @@ bones/4/parent = 0
 bones/4/rest = Transform3D(-0.9247777, 0.3805076, -1.2222918e-06, -0.38050753, -0.92477787, -2.7046394e-07, -1.2332617e-06, 2.1497219e-07, 1, 0.14194445, 0.21078514, 3.7363087e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(0.14180034, 0.21131313, 1.8976223e-05)
-bones/4/rotation = Quaternion(-0.11464694, -0.13967763, 0.9612425, -0.20822833)
+bones/4/rotation = Quaternion(-0.11449584, -0.14018121, 0.9600317, -0.21349244)
 bones/4/scale = Vector3(0.9999999, 1, 1)
 bones/5/name = "RightHand.001"
 bones/5/parent = 4
@@ -820,14 +820,14 @@ settings/0/joints/1/limitation = null
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="Armature/Skeleton3D" unique_id=1314951815]
 
 [node name="Physical Bone RightHand" type="PhysicalBone3D" parent="Armature/Skeleton3D/PhysicalBoneSimulator3D" unique_id=757157688]
-transform = Transform3D(-1.5396469, 0.40300316, -0.7011785, -0.62342244, -1.5519159, 0.47694463, -0.5151769, 0.6735875, 1.5183702, 0.19545208, 0.15624984, -0.11253724)
+transform = Transform3D(-1.5326828, 0.42049477, -0.7061464, -0.6442224, -1.5425334, 0.47973245, -0.51032937, 0.68436086, 1.5151862, 0.195824, 0.15604042, -0.114168644)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 joint_type = 1
-joint_offset = Transform3D(1.0000005, -4.4408905e-16, 1.4901158e-08, 0, 1.0000004, 2.9802322e-08, -1.4901161e-08, -2.9802326e-08, 1.0000002, 0.0035694758, -0.0012145005, 0.06798064)
+joint_offset = Transform3D(1.0000005, -4.4408905e-16, 1.4901158e-08, 0, 1.0000004, 2.9802322e-08, -1.4901161e-08, -2.9802326e-08, 1.0000002, 0.0035878092, -0.0012135841, 0.06799493)
 joint_rotation = Vector3(-2.9802315e-08, 1.4901154e-08, 0)
-body_offset = Transform3D(1.7366734, 0.09233397, -0.0038967133, -0.0048327744, 0.017506957, -1.7390354, -0.092289746, 1.7365893, 0.017739177, -0.005821973, 0.11825924, 0.0012325943)
+body_offset = Transform3D(1.7366748, 0.09231098, -0.0038214922, -0.004755616, 0.017478049, -1.7390361, -0.09226762, 1.736591, 0.017705977, -0.0058589876, 0.11828392, 0.0012346208)
 bone_name = "RightHand"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0

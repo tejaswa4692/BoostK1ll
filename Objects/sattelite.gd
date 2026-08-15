@@ -12,6 +12,8 @@ var assigned_observatory: Node = null
 @export var fuel = 2000
 @export var satellite_name := "Explorer I"
 
+var has_player: bool = false
+var current_player: CharacterBody3D = null
 
 const ACTION_THRUST       = "thrust"
 const ACTION_RCS_UP       = "rcs_up"
@@ -22,7 +24,6 @@ const ACTION_RCS_FORWARD  = "rcs_forward"
 const ACTION_RCS_BACK     = "rcs_back"
 
 var thruster_material: ShaderMaterial
-var has_player = false
 
 @export var pitch_torque: float = 1.0
 @export var yaw_torque: float = 1.0
@@ -35,8 +36,6 @@ const ACTION_YAW_LEFT   = "left"
 const ACTION_YAW_RIGHT  = "right"
 const ACTION_ROLL_LEFT  = "roll_left"
 const ACTION_ROLL_RIGHT = "roll_right"
-
-
 
 var current_bias: float = 0.0
 
