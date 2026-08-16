@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://clx06nns2pqke" path="res://Objects/placement_controller.gd" id="9_lhpfe"]
 [ext_resource type="Texture2D" uid="uid://c1r3j2kjk0lx2" path="res://Assets/InventoryIcons/generator.png" id="10_bmeml"]
 [ext_resource type="Script" uid="uid://dd6d6yt672gtw" path="res://Objects/back_pack_controller.gd" id="10_l0frw"]
+[ext_resource type="Script" uid="uid://k4eqoro482q" path="res://Objects/Player/note_pad.gd" id="11_6bcha"]
 [ext_resource type="Script" uid="uid://mir8cju4ku2b" path="res://Objects/scrap_manager.gd" id="11_8fhyy"]
 [ext_resource type="AudioStream" uid="uid://btu2vp246g6w8" path="res://Assets/Music/alex_jauk-walking-in-water-199418.mp3" id="12_st566"]
 
@@ -456,7 +457,6 @@ collision_mask = 2
 script = ExtResource("1_b5u8h")
 
 [node name="NormalBoneyUI" type="Control" parent="." unique_id=253795446]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -724,6 +724,54 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Build"
 
+[node name="NotePad" type="Control" parent="InventoryUI" unique_id=1624739181]
+layout_mode = 1
+anchor_left = 0.86700004
+anchor_top = 0.735
+anchor_right = 0.99200004
+anchor_bottom = 0.994
+offset_left = 0.21594238
+offset_top = -0.27999878
+offset_right = 0.21594238
+offset_bottom = -0.11199951
+script = ExtResource("11_6bcha")
+
+[node name="Panel" type="Panel" parent="InventoryUI/NotePad" unique_id=937804159]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="InventoryUI/NotePad" unique_id=1694822922]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.035
+anchor_top = 0.035
+anchor_right = 0.965
+anchor_bottom = 0.88
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_emjar")
+theme_override_font_sizes/font_size = 10
+item_count = 1
+item_0/text = "192,213,123"
+
+[node name="Button" type="Button" parent="InventoryUI/NotePad" unique_id=1374046949]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_emjar")
+theme_override_font_sizes/font_size = 6
+text = "Record Coords"
+
 [node name="Marker3D" type="Marker3D" parent="." unique_id=1090321486]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13529381, 0.20635363, -0.121307194)
 
@@ -736,21 +784,21 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, -0.022641242, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, -0.022641242, 0)
-bones/0/rotation = Quaternion(-0.0021003834, 1.1133373e-07, -2.368798e-09, 0.99999785)
+bones/0/rotation = Quaternion(-0.020872429, 1.1123966e-07, -7.830334e-09, 0.9997822)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23699029, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.23699029, 0)
-bones/1/rotation = Quaternion(0.00053035334, -7.352872e-05, -0.0007892436, 0.99999964)
+bones/1/rotation = Quaternion(0.019302707, -5.869959e-05, -0.00079047726, 0.9998134)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "LeftHand"
 bones/2/parent = 0
 bones/2/rest = Transform3D(-0.9319116, -0.36268908, -2.1853853e-07, 0.36268958, -0.9319103, 1.2662169e-07, -2.4958297e-07, 3.8738506e-08, 1, -0.123382494, 0.2129689, -2.6189195e-08)
 bones/2/enabled = true
 bones/2/position = Vector3(-0.123382494, 0.2129689, -2.6189195e-08)
-bones/2/rotation = Quaternion(-0.11660739, -0.088549994, 0.9761842, 0.16008149)
+bones/2/rotation = Quaternion(-0.11593338, -0.08523885, 0.97252125, 0.18302001)
 bones/2/scale = Vector3(1.0000014, 1, 1)
 bones/3/name = "LeftHand.001"
 bones/3/parent = 2
@@ -764,7 +812,7 @@ bones/4/parent = 0
 bones/4/rest = Transform3D(-0.9247777, 0.3805076, -1.2222918e-06, -0.38050753, -0.92477787, -2.7046394e-07, -1.2332617e-06, 2.1497219e-07, 1, 0.14194445, 0.21078514, 3.7363087e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(0.14180034, 0.21131313, 1.8976223e-05)
-bones/4/rotation = Quaternion(-0.115485854, -0.136534, 0.9679731, -0.17620876)
+bones/4/rotation = Quaternion(-0.1149003, -0.1387947, 0.9632737, -0.19909249)
 bones/4/scale = Vector3(0.9999999, 1, 1)
 bones/5/name = "RightHand.001"
 bones/5/parent = 4
@@ -821,14 +869,14 @@ settings/0/joints/1/limitation = null
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="Armature/Skeleton3D" unique_id=1314951815]
 
 [node name="Physical Bone RightHand" type="PhysicalBone3D" parent="Armature/Skeleton3D/PhysicalBoneSimulator3D" unique_id=757157688]
-transform = Transform3D(-1.5756285, 0.2983963, -0.67300016, -0.49910071, -1.6016873, 0.4583353, -0.5411729, 0.608385, 1.5367415, 0.19360831, 0.1573566, -0.102695204)
+transform = Transform3D(-1.5501267, 0.3729997, -0.6946607, -0.5885219, -1.5670235, 0.47186238, -0.52471346, 0.6556549, 1.522947, 0.19589823, 0.15661524, -0.10995422)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 joint_type = 1
-joint_offset = Transform3D(1.0000005, -4.4408905e-16, 1.4901158e-08, 0, 1.0000004, 2.9802322e-08, -1.4901161e-08, -2.9802326e-08, 1.0000002, 0.0036024123, -0.0012114192, 0.068009496)
+joint_offset = Transform3D(1.0000005, -4.4408905e-16, 1.4901158e-08, 0, 1.0000004, 2.9802322e-08, -1.4901161e-08, -2.9802326e-08, 1.0000002, 0.00397532, -0.0012572852, 0.06833074)
 joint_rotation = Vector3(-2.9802315e-08, 1.4901154e-08, 0)
-body_offset = Transform3D(1.7366753, 0.0923031, -0.0037541091, -0.004685849, 0.017431378, -1.7390363, -0.09226067, 1.7365916, 0.01765585, -0.005889088, 0.11830899, 0.0012353361)
+body_offset = Transform3D(1.7367015, 0.09187396, -0.0020765066, -0.0029725432, 0.016882777, -1.7390461, -0.09184924, 1.7366203, 0.017016053, -0.0066465437, 0.11886335, 0.0013858378)
 bone_name = "RightHand"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -1015,6 +1063,7 @@ pitch_scale = 3.75
 
 [connection signal="item_clicked" from="InventoryUI/BuildMenu/ItemList" to="InventoryUI/BuildMenu" method="_on_item_list_item_clicked"]
 [connection signal="pressed" from="InventoryUI/BuildMenu/Button" to="InventoryUI/BuildMenu" method="try_place_buildmenu"]
+[connection signal="pressed" from="InventoryUI/NotePad/Button" to="InventoryUI/NotePad" method="_on_button_pressed"]
 [connection signal="item_clicked" from="SatteliteUI/ItemList" to="." method="_on_item_list_item_clicked"]
 [connection signal="item_clicked" from="SatteliteUI/ItemList" to="SatelliteUIController" method="on_item_list_item_clicked"]
 [connection signal="item_clicked" from="SatteliteUI/UpgradesList" to="." method="_on_item_list_item_clicked"]
