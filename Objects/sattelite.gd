@@ -12,6 +12,8 @@ var assigned_observatory: Node = null
 @export var fuel = 2000
 @export var satellite_name := "Explorer I"
 
+var canmount: bool = true
+
 var has_player: bool = false
 var current_player: CharacterBody3D = null
 
@@ -170,3 +172,52 @@ func _handle_rotation() -> void:
 
 func can_unmount() -> bool:
 	return true
+
+
+
+### Save Logic
+
+func get_save_data() -> Dictionary:
+	return {
+		"position": {"x": global_position.x, "y": global_position.y, "z": global_position.z},
+		"basis": {
+			"x": {"x": global_transform.basis.x.x, "y": global_transform.basis.x.y, "z": global_transform.basis.x.z},
+			"y": {"x": global_transform.basis.y.x, "y": global_transform.basis.y.y, "z": global_transform.basis.y.z},
+			"z": {"x": global_transform.basis.z.x, "y": global_transform.basis.z.y, "z": global_transform.basis.z.z}
+		},
+		"linear_velocity": {"x": linear_velocity.x, "y": linear_velocity.y, "z": linear_velocity.z},
+		"angular_velocity": {"x": angular_velocity.x, "y": angular_velocity.y, "z": angular_velocity.z},
+		"fuel": fuel,
+		"satellite_name": satellite_name,
+		"canmount": canmount,
+		"assigned_observatory_path": str(assigned_observatory.get_path()) if is_instance_valid(assigned_observatory) else ""
+	}
+
+
+func load_save_data(data: Dictionary) -> void:
+	var pos: Dictionary = data["position"]
+	global_position = Vector3(pos["x"], pos["y"], pos["z"])
+
+	var b: Dictionary = data["basis"]
+	var new_basis: Basis = Basis(
+		Vector3(b["x"]["x"], b["x"]["y"], b["x"]["z"]),
+		Vector3(b["y"]["x"], b["y"]["y"], b["y"]["z"]),
+		Vector3(b["z"]["x"], b["z"]["y"], b["z"]["z"])
+	)
+	global_transform = Transform3D(new_basis, global_position)
+
+	var lv: Dictionary = data["linear_velocity"]
+	linear_velocity = Vector3(lv["x"], lv["y"], lv["z"])
+
+	var av: Dictionary = data["angular_velocity"]
+	angular_velocity = Vector3(av["x"], av["y"], av["z"])
+
+	fuel = data["fuel"]
+	satellite_name = data["satellite_name"]
+	canmount = data["canmount"]
+
+	var obs_path: String = data.get("assigned_observatory_path", "")
+	if obs_path != "":
+		var obs: Node = get_node_or_null(obs_path)
+		if obs and obs.has_method("assign_satellite"):
+			obs.assign_satellite(self)

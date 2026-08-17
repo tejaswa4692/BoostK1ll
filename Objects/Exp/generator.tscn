@@ -9,7 +9,7 @@
 height = 1.0170898
 radius = 0.41845703
 
-[node name="Generator" type="StaticBody3D" unique_id=1460418343 groups=["generator"]]
+[node name="Generator" type="StaticBody3D" unique_id=1460418343 groups=["generator", "savable"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_xxcu2")

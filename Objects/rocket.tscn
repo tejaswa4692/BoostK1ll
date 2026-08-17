@@ -147,7 +147,7 @@ corner_radius_bottom_left = 20
 shading_mode = 0
 albedo_color = Color(0.42073005, 0.6532007, 0.43404537, 1)
 
-[node name="Rocket" type="RigidBody3D" unique_id=1263267957 groups=["rocket"]]
+[node name="Rocket" type="RigidBody3D" unique_id=1263267957 groups=["rocket", "savable"]]
 mass = 45.0
 gravity_scale = 0.0
 contact_monitor = true

@@ -637,7 +637,35 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y5wwg")
 
-[node name="Rover" type="VehicleBody3D" unique_id=232793370]
+[sub_resource type="ImageTexture" id="ImageTexture_qfy0r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vca5b"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.74595785, 0.91144365, 0.9139114, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfy0r"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.32782212, 0.65342814, 0.73535824, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[node name="Rover" type="VehicleBody3D" unique_id=232793370 groups=["savable", "vehicle"]]
 collision_layer = 3
 collision_mask = 3
 gravity_scale = 0.0
@@ -878,6 +906,36 @@ mesh = SubResource("ArrayMesh_p70ln")
 [node name="MudguardLeft" type="MeshInstance3D" parent="." unique_id=791422898]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4909, 0, -0.700123)
 mesh = SubResource("ArrayMesh_rkub1")
+
+[node name="FuelGuage" type="Control" parent="." unique_id=1977987538]
+layout_mode = 3
+anchor_left = 0.3
+anchor_top = 0.94000006
+anchor_right = 0.7
+anchor_bottom = 0.97400004
+offset_top = -0.12005615
+offset_bottom = -0.15203857
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="FuelGuageSlider" type="HSlider" parent="FuelGuage" unique_id=1472418668]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = SubResource("ImageTexture_qfy0r")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_qfy0r")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_qfy0r")
+theme_override_icons/tick = SubResource("ImageTexture_qfy0r")
+theme_override_styles/slider = SubResource("StyleBoxFlat_vca5b")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_qfy0r")
+step = 0.5
+value = 50.0
+
+[node name="Charger_Location" type="Marker3D" parent="." unique_id=387305348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2757625, 0.20222616)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_proximity_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_proximity_exited"]

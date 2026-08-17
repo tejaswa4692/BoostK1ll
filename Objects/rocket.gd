@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 var canmove: bool = true
+var canmount: bool = true
 var has_player: bool = false
 var current_player: CharacterBody3D = null
 

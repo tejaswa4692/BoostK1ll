@@ -36,6 +36,12 @@ var items: Dictionary = {
 		"icon": preload("res://Assets/InventoryIcons/generator.png"),
 		"description": "A 50kW generator",
 		"costs": {"scraps": 20},
+	},
+	"EV Charger": {
+		"scene": preload("res://Objects/Electronics/EVCharger/ev_charger.tscn"),
+		"icon": preload("res://Assets/InventoryIcons/generator.png"),
+		"description": "A station that can fill the juice up for your EV",
+		"costs": {"scraps": 20},
 	}
 }
 

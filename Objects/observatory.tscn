@@ -501,7 +501,7 @@ metadata/extras = {
 "mmd_material": {}
 }
 
-[node name="Observatory" type="Node3D" unique_id=1190209170 groups=["observatory"]]
+[node name="Observatory" type="Node3D" unique_id=1190209170 groups=["observatory", "savable"]]
 script = ExtResource("1_jhae5")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=749667026]

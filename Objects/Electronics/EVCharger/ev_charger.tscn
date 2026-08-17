@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://bo17i05habsw4"]
+
+[ext_resource type="Script" uid="uid://bfvqdw1iflolk" path="res://Objects/Electronics/EVCharger/ev_charger.gd" id="1_o7tt6"]
+[ext_resource type="FontFile" uid="uid://dujscdaiocpca" path="res://Assets/0xProto/0xProtoNerdFont-Regular.ttf" id="2_0xnd8"]
+[ext_resource type="PackedScene" uid="uid://u8hkaijh68f0" path="res://Assets/ElectricPole/EVCharger.blend" id="2_nxa7u"]
+[ext_resource type="AudioStream" uid="uid://co3ouclpuj84q" path="res://Assets/Rover/charging.mp3" id="3_0saum"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o1n36"]
+size = Vector3(1.995, 0.40439454, 0.92902344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o7tt6"]
+size = Vector3(1.8985596, 1.0372406, 1.3494873)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0saum"]
+radius = 0.6064453
+
+[node name="EVCharger" type="StaticBody3D" unique_id=1273322375 groups=["electrical_appliance", "planet", "savable"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_o7tt6")
+
+[node name="EVCharger2" parent="." unique_id=234141972 instance=ExtResource("2_nxa7u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.464388e-05, 0, -0.39772326)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=898791253]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0.05506414, 0.8515463, -0.38009238)
+shape = SubResource("BoxShape3D_o1n36")
+
+[node name="CarArea" type="Area3D" parent="." unique_id=586885840]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.4703484e-05, -0.2564204, 1.2828687)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CarArea" unique_id=203849865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48443604, 0.6822981, -0.005065918)
+shape = SubResource("BoxShape3D_o7tt6")
+
+[node name="PlayerArea" type="Area3D" parent="." unique_id=820121863]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.913012, -0.2699156, 1.2828687)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea" unique_id=957187459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6718156, 1.0065825, -0.31891334)
+shape = SubResource("CylinderShape3D_0saum")
+
+[node name="location_to_connect_wire_to" type="Marker3D" parent="." unique_id=229037719]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.4584274e-05, 1.0387985, -0.7171312)
+
+[node name="EVTimer" type="Timer" parent="." unique_id=120972107]
+wait_time = 16.85
+one_shot = true
+
+[node name="EVCharger" type="Control" parent="." unique_id=1218734685]
+layout_mode = 3
+anchor_left = 0.3
+anchor_top = 0.4
+anchor_right = 0.7
+anchor_bottom = 0.6
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EVUI" type="Control" parent="EVCharger" unique_id=94025596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EVCharger/EVUI" unique_id=1645215669]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FullCharge" type="Button" parent="EVCharger/EVUI" unique_id=1161655534]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.095
+anchor_top = 0.43
+anchor_right = 0.905
+anchor_bottom = 0.895
+offset_right = 0.3760376
+offset_bottom = 0.8079834
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_0xnd8")
+text = "Full charge"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EVCharger/EVUI" unique_id=1334154378]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.42200002
+offset_right = -0.39996338
+offset_bottom = -2.8912163
+theme_override_fonts/normal_font = ExtResource("2_0xnd8")
+text = "EV Charger "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ElectricityWarning" type="Control" parent="EVCharger" unique_id=2048703800]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EVCharger/ElectricityWarning" unique_id=1713941960]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="EVCharger/ElectricityWarning" unique_id=1964967418]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_0xnd8")
+text = "Electricity Not Connected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoCarWarning" type="Control" parent="EVCharger" unique_id=685441675]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EVCharger/NoCarWarning" unique_id=1028992120]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="EVCharger/NoCarWarning" unique_id=571094238]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_0xnd8")
+text = "No Car on Dock"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Charging" type="AudioStreamPlayer3D" parent="." unique_id=1961358019]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.34573466, 1.3904958, 0.24288635)
+stream = ExtResource("3_0saum")
+max_distance = 7.75
+
+[connection signal="body_entered" from="CarArea" to="." method="_on_car_area_body_entered"]
+[connection signal="body_exited" from="CarArea" to="." method="_on_car_area_body_exited"]
+[connection signal="body_entered" from="PlayerArea" to="." method="_on_player_area_body_entered"]
+[connection signal="body_exited" from="PlayerArea" to="." method="_on_player_area_body_exited"]
+[connection signal="timeout" from="EVTimer" to="." method="_on_ev_timer_timeout"]
+[connection signal="pressed" from="EVCharger/EVUI/FullCharge" to="." method="_on_full_charge_pressed"]

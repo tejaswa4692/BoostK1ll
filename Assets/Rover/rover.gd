@@ -11,12 +11,18 @@ extends VehicleBody3D
 @onready var MudguardFrontLeft: MeshInstance3D = $MudguardLeft
 
 @onready var front_left_wheel: VehicleWheel3D = $FrontLeftWheel
+@onready var fuel_guage_slider: HSlider = $FuelGuage/FuelGuageSlider
 
 var canmove: bool = true
+var canmount: bool = true
 
 var has_player: bool = false:
 	set(value):
 		has_player = value
+		if has_player: #Initialize fuel gauage slider here
+			fuel_guage_slider.show()
+		else:
+			fuel_guage_slider.hide()
 		if driver_mesh:
 			driver_mesh.visible = value
 		if not value:
@@ -28,10 +34,16 @@ var gravity_direction: Vector3 = Vector3.DOWN
 var gravity_strength: float = 0.0
 var gravity_force: Vector3 = Vector3.ZERO
 var _strongest_gravity_source = null
-
+var charge = 200:
+	set(value):
+		charge = value
+		fuel_guage_slider.value = charge
+const max_charge = 200
 
 func _ready() -> void:
 	gravity_scale = 0.0
+	fuel_guage_slider.max_value = max_charge
+	fuel_guage_slider.value = max_charge
 	if driver_mesh:
 		driver_mesh.hide()
 
@@ -65,9 +77,11 @@ func _process(_delta: float) -> void:
 func _handle_driving(delta: float) -> void:
 	brake = 0.0
 	var throttle := 0.0
-	if Input.is_action_pressed("forward"):
+	if Input.is_action_pressed("forward") and charge >= 0:
+		handle_fuel_guage(delta)
 		throttle += 1.0
-	if Input.is_action_pressed("back"):
+	if Input.is_action_pressed("back") and charge >= 0:
+		handle_fuel_guage(delta)
 		throttle -= 1.0
 	engine_force = throttle * engine_power
 	if Input.is_action_pressed("jump"):
@@ -164,3 +178,36 @@ func _on_proximity_entered(body: Node) -> void:
 func _on_proximity_exited(body: Node) -> void:
 	if body.has_method("set_nearest_rocket"):
 		body.set_nearest_rocket(null)
+
+func handle_fuel_guage(delta: float) -> void:
+	charge -= 0.05
+
+
+
+### AFTER THIS ALL THE SAVE LOGIC IS
+
+func get_save_data() -> Dictionary:
+	return {
+		"position": {"x": global_position.x, "y": global_position.y, "z": global_position.z},
+		"basis": {
+			"x": {"x": global_transform.basis.x.x, "y": global_transform.basis.x.y, "z": global_transform.basis.x.z},
+			"y": {"x": global_transform.basis.y.x, "y": global_transform.basis.y.y, "z": global_transform.basis.y.z},
+			"z": {"x": global_transform.basis.z.x, "y": global_transform.basis.z.y, "z": global_transform.basis.z.z}
+		},
+		"charge": charge
+	}
+
+
+func load_save_data(data: Dictionary) -> void:
+	var pos: Dictionary = data["position"]
+	global_position = Vector3(pos["x"], pos["y"], pos["z"])
+
+	var b: Dictionary = data["basis"]
+	var new_basis: Basis = Basis(
+		Vector3(b["x"]["x"], b["x"]["y"], b["x"]["z"]),
+		Vector3(b["y"]["x"], b["y"]["y"], b["y"]["z"]),
+		Vector3(b["z"]["x"], b["z"]["y"], b["z"]["z"])
+	)
+	global_transform = Transform3D(new_basis, global_position)
+
+	charge = data["charge"]

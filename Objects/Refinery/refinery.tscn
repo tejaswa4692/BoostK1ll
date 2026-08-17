@@ -35,7 +35,7 @@ HSlider/styles/slider = SubResource("StyleBoxFlat_gnwwr")
 height = 1.3200684
 radius = 0.32080078
 
-[node name="Refinery" type="Node3D" unique_id=1738504274]
+[node name="Refinery" type="Node3D" unique_id=1738504274 groups=["savable"]]
 script = ExtResource("1_ivw4s")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=2065942981]

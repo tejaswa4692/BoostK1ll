@@ -27,7 +27,7 @@ extends CharacterBody3D
 @onready var water_walk: AudioStreamPlayer3D = $WaterWalk
 @onready var scraps_warning: RichTextLabel = $NeedScraps
 @onready var build_menu: Control = $InventoryUI/BuildMenu
-
+@onready var placement_arrow: Node3D = $PlacementArrow
 
 var ui_open: bool
 var settings_open: bool = false
@@ -99,7 +99,7 @@ func _physics_process(delta: float) -> void:
 	movement_controller.handle_movement(delta, head)
 	movement_controller.update_tree(animation_tree)
 	update_water_walk_audio()
-	
+	show_placement_arrow()
 	if Input.is_action_just_pressed("buildmenu") and !settings_open and (!ui_open or build_menu.visible):
 		build_menu.showorhide_build_menu()
 		
@@ -183,3 +183,7 @@ func add_resource_amount(resource_name: String, amount: int) -> void:
 			copper += amount
 		"iron":
 			iron += amount
+
+func show_placement_arrow() -> void:
+	placement_arrow.show()
+	placement_arrow.global_position = raycast.get_collision_point()

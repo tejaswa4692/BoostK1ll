@@ -43,7 +43,7 @@ shader_parameter/foam_color = Color(0.8, 0.8, 0.8, 1)
 shader_parameter/foam_distance = 0.15000000642648
 shader_parameter/foam_noise_scale = 15.58000073679012
 
-[node name="Planet-Earth3" type="Node3D" unique_id=58250303]
+[node name="Planet-Earth3" type="Node3D" unique_id=58250303 groups=["savable"]]
 script = ExtResource("1_rvel7")
 
 [node name="Planet-LOD" parent="." unique_id=252755823 instance=ExtResource("2_rvel7")]

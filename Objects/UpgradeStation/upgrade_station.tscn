@@ -16,7 +16,7 @@ size = Vector3(0.4897461, 2.647583, 0.47607422)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3vl8h"]
 size = Vector3(2.9956055, 2.531433, 2.9733887)
 
-[node name="UpgradeStation" type="StaticBody3D" unique_id=1514566262 groups=["electrical_appliance"]]
+[node name="UpgradeStation" type="StaticBody3D" unique_id=1514566262 groups=["electrical_appliance", "savable"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_758ek")

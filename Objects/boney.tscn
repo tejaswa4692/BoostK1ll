@@ -16,9 +16,11 @@
 [ext_resource type="Script" uid="uid://clx06nns2pqke" path="res://Objects/placement_controller.gd" id="9_lhpfe"]
 [ext_resource type="Texture2D" uid="uid://c1r3j2kjk0lx2" path="res://Assets/InventoryIcons/generator.png" id="10_bmeml"]
 [ext_resource type="Script" uid="uid://dd6d6yt672gtw" path="res://Objects/back_pack_controller.gd" id="10_l0frw"]
+[ext_resource type="Texture2D" uid="uid://bxnrivd8fmhi" path="res://icon.png" id="11_1fud4"]
 [ext_resource type="Script" uid="uid://k4eqoro482q" path="res://Objects/Player/note_pad.gd" id="11_6bcha"]
 [ext_resource type="Script" uid="uid://mir8cju4ku2b" path="res://Objects/scrap_manager.gd" id="11_8fhyy"]
 [ext_resource type="AudioStream" uid="uid://btu2vp246g6w8" path="res://Assets/Music/alex_jauk-walking-in-water-199418.mp3" id="12_st566"]
+[ext_resource type="ArrayMesh" uid="uid://be6ohvktd8m7x" path="res://Assets/Arrow/Arrow.obj" id="21_kgayt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s3ig0"]
 radius = 0.10449219
@@ -451,7 +453,12 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="Boney" type="CharacterBody3D" unique_id=666712437 groups=["player"]]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_702mh"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.41960785, 0.654902, 0.43529412, 0.30980393)
+
+[node name="Boney" type="CharacterBody3D" unique_id=666712437 groups=["player", "savable"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_b5u8h")
@@ -670,7 +677,7 @@ anchor_bottom = 0.96
 offset_left = 0.20959473
 grow_horizontal = 2
 grow_vertical = 2
-item_count = 6
+item_count = 7
 max_columns = 5
 fixed_icon_size = Vector2i(98, 98)
 item_0/icon = ExtResource("4_l4ocb")
@@ -679,6 +686,7 @@ item_2/icon = ExtResource("7_8ne1u")
 item_3/icon = ExtResource("8_ehas0")
 item_4/icon = ExtResource("9_bmeml")
 item_5/icon = ExtResource("10_bmeml")
+item_6/icon = ExtResource("11_1fud4")
 
 [node name="TextureRect" type="TextureRect" parent="InventoryUI/BuildMenu" unique_id=2077934651]
 layout_mode = 1
@@ -784,21 +792,21 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, -0.022641242, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, -0.022641242, 0)
-bones/0/rotation = Quaternion(-0.020872429, 1.1123966e-07, -7.830334e-09, 0.9997822)
+bones/0/rotation = Quaternion(-0.002130412, 1.11288365e-07, -9.093872e-09, 0.9999978)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23699029, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.23699029, 0)
-bones/1/rotation = Quaternion(0.019302707, -5.869959e-05, -0.00079047726, 0.9998134)
+bones/1/rotation = Quaternion(0.00056038424, -7.35049e-05, -0.0007892392, 0.9999995)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "LeftHand"
 bones/2/parent = 0
 bones/2/rest = Transform3D(-0.9319116, -0.36268908, -2.1853853e-07, 0.36268958, -0.9319103, 1.2662169e-07, -2.4958297e-07, 3.8738506e-08, 1, -0.123382494, 0.2129689, -2.6189195e-08)
 bones/2/enabled = true
 bones/2/position = Vector3(-0.123382494, 0.2129689, -2.6189195e-08)
-bones/2/rotation = Quaternion(-0.11593338, -0.08523885, 0.97252125, 0.18302001)
+bones/2/rotation = Quaternion(-0.11660639, -0.08854475, 0.9761788, 0.1601183)
 bones/2/scale = Vector3(1.0000014, 1, 1)
 bones/3/name = "LeftHand.001"
 bones/3/parent = 2
@@ -812,7 +820,7 @@ bones/4/parent = 0
 bones/4/rest = Transform3D(-0.9247777, 0.3805076, -1.2222918e-06, -0.38050753, -0.92477787, -2.7046394e-07, -1.2332617e-06, 2.1497219e-07, 1, 0.14194445, 0.21078514, 3.7363087e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(0.14180034, 0.21131313, 1.8976223e-05)
-bones/4/rotation = Quaternion(-0.1149003, -0.1387947, 0.9632737, -0.19909249)
+bones/4/rotation = Quaternion(-0.11548503, -0.1365377, 0.9679661, -0.17624547)
 bones/4/scale = Vector3(0.9999999, 1, 1)
 bones/5/name = "RightHand.001"
 bones/5/parent = 4
@@ -869,14 +877,14 @@ settings/0/joints/1/limitation = null
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="Armature/Skeleton3D" unique_id=1314951815]
 
 [node name="Physical Bone RightHand" type="PhysicalBone3D" parent="Armature/Skeleton3D/PhysicalBoneSimulator3D" unique_id=757157688]
-transform = Transform3D(-1.5501267, 0.3729997, -0.6946607, -0.5885219, -1.5670235, 0.47186238, -0.52471346, 0.6556549, 1.522947, 0.19589823, 0.15661524, -0.10995422)
+transform = Transform3D(-1.5745447, 0.2987488, -0.67537653, -0.5004793, -1.6012064, 0.45851234, -0.54305136, 0.6094769, 1.5356458, 0.1948323, 0.15728502, -0.10295724)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 joint_type = 1
-joint_offset = Transform3D(1.0000005, -4.4408905e-16, 1.4901158e-08, 0, 1.0000004, 2.9802322e-08, -1.4901161e-08, -2.9802326e-08, 1.0000002, 0.00397532, -0.0012572852, 0.06833074)
+joint_offset = Transform3D(1.0000005, -4.4408905e-16, 1.4901158e-08, 0, 1.0000004, 2.9802322e-08, -1.4901161e-08, -2.9802326e-08, 1.0000002, 0.0040869196, -0.0012842398, 0.0684259)
 joint_rotation = Vector3(-2.9802315e-08, 1.4901154e-08, 0)
-body_offset = Transform3D(1.7367015, 0.09187396, -0.0020765066, -0.0029725432, 0.016882777, -1.7390461, -0.09184924, 1.7366203, 0.017016053, -0.0066465437, 0.11886335, 0.0013858378)
+body_offset = Transform3D(1.7367089, 0.09173733, -0.0015514791, -0.0024358332, 0.016700208, -1.7390487, -0.09171803, 1.7366291, 0.016805112, -0.0068738163, 0.119027376, 0.0014551878)
 bone_name = "RightHand"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -1060,6 +1068,13 @@ stream = ExtResource("12_st566")
 attenuation_model = 2
 volume_db = 22.265
 pitch_scale = 3.75
+
+[node name="PlacementArrow" type="Node3D" parent="." unique_id=425505505]
+
+[node name="Arrow" type="MeshInstance3D" parent="PlacementArrow" unique_id=268405200]
+transform = Transform3D(2, 0, 0, 0, -2, -3.019916e-07, 0, 3.019916e-07, -2, 0, 0.4525534, 0)
+mesh = ExtResource("21_kgayt")
+surface_material_override/0 = SubResource("StandardMaterial3D_702mh")
 
 [connection signal="item_clicked" from="InventoryUI/BuildMenu/ItemList" to="InventoryUI/BuildMenu" method="_on_item_list_item_clicked"]
 [connection signal="pressed" from="InventoryUI/BuildMenu/Button" to="InventoryUI/BuildMenu" method="try_place_buildmenu"]

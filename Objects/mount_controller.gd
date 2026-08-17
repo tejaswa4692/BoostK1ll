@@ -14,6 +14,8 @@ func mount(target) -> void:
 func do_mount(target) -> void:
 	if target == null:
 		return
+	if !target.canmount:
+		return
 	if player.mounted_target != null and is_instance_valid(player.mounted_target):
 		player.mounted_target.has_player = false
 		player.mounted_target.current_player = null

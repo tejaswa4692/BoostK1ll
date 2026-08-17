@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://nm3gppfr4h1n"]
+
+[ext_resource type="Script" uid="uid://cth10v2vjqglj" path="res://Objects/Antenna/yagi.gd" id="1_v71xa"]
+[ext_resource type="FontFile" uid="uid://dujscdaiocpca" path="res://Assets/0xProto/0xProtoNerdFont-Regular.ttf" id="2_srhof"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_slwyl"]
+size = Vector3(0.13, 1, 0.13)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v71xa"]
+size = Vector3(0.13, 2.45, 0.13)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_srhof"]
+height = 2000.0
+radius = 18.90918
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_slwyl"]
+size = Vector3(0.155, 0.915, 0.24)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pwea5"]
+height = 0.80651855
+radius = 0.6118164
+
+[node name="Yagi" type="StaticBody3D" unique_id=1598430404 groups=["ANTENNA"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_v71xa")
+
+[node name="Base" type="MeshInstance3D" parent="." unique_id=1741456052]
+mesh = SubResource("BoxMesh_slwyl")
+
+[node name="Antenna" type="MeshInstance3D" parent="Base" unique_id=1352747202]
+transform = Transform3D(1, 0, 0, 0, -0.008115723, 0.99996704, 0, -0.99996704, -0.008115723, 0, 0.50110555, 0)
+mesh = SubResource("BoxMesh_v71xa")
+
+[node name="ScamArea" type="Area3D" parent="Base/Antenna" unique_id=489809171]
+transform = Transform3D(1, 0, 0, 0, -0.008115725, -0.99996716, 0, 0.9999673, -0.008115724, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Antenna/ScamArea" unique_id=774462558]
+transform = Transform3D(1.0000013, 0, 0, 0, -4.371139e-08, -1.0000094, 0, 1, -4.37118e-08, -2.022, 0.022, -1000)
+shape = SubResource("CylinderShape3D_srhof")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1785854765]
+shape = SubResource("BoxShape3D_slwyl")
+
+[node name="YagiUI" type="Control" parent="." unique_id=61884507]
+visible = false
+layout_mode = 3
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.82
+anchor_bottom = 0.82
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="YagiUI" unique_id=885711969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heading" type="RichTextLabel" parent="YagiUI" unique_id=2071075747]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.143
+offset_bottom = 2.9483147
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_srhof")
+theme_override_font_sizes/normal_font_size = 32
+text = "Yagi Controller"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="YagiUI" unique_id=370856715]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.517
+anchor_top = 0.25
+anchor_right = 0.94000006
+anchor_bottom = 0.51900005
+offset_left = 0.33789063
+offset_right = -6.1035156e-05
+offset_bottom = -0.113464355
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="X" type="LineEdit" parent="YagiUI/VBoxContainer" unique_id=1055949222]
+layout_mode = 2
+placeholder_text = "X position to point to"
+
+[node name="Y" type="LineEdit" parent="YagiUI/VBoxContainer" unique_id=2078234956]
+layout_mode = 2
+placeholder_text = "Y position to point to"
+
+[node name="Z" type="LineEdit" parent="YagiUI/VBoxContainer" unique_id=1497987868]
+layout_mode = 2
+placeholder_text = "Z position to point to"
+
+[node name="TransmissionInfo" type="RichTextLabel" parent="YagiUI" unique_id=838531134]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.22700001
+anchor_right = 0.50100005
+anchor_bottom = 0.92200005
+offset_left = 0.31583023
+offset_top = 0.20046997
+offset_right = -0.23428345
+offset_bottom = -0.022705078
+text = "Test RX
+RSSI: -6 Dbi
+Signal: No Signal
+Info:	
+	Sats: Null
+	Estimate Distance: 100
+	Estimate Coords:
+	123213, 12312312, 5343523
+	Time last heartbeat: 5Y ago
+	Life: null
+	"
+
+[node name="Point" type="Button" parent="YagiUI" unique_id=1000226815]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.51900005
+anchor_top = 0.588
+anchor_right = 0.93900007
+anchor_bottom = 0.72300005
+offset_left = -0.09060669
+offset_top = 0.16513062
+offset_right = -0.07141113
+offset_bottom = -0.07247925
+text = "Point to"
+
+[node name="ScanEverywhere" type="Button" parent="YagiUI" unique_id=1242365780]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.517
+anchor_top = 0.753
+anchor_right = 0.93700004
+anchor_bottom = 0.887
+offset_left = 0.33789063
+offset_top = -0.12527466
+offset_right = 0.35705566
+offset_bottom = 0.038879395
+text = "Scan Everywhere"
+
+[node name="Timer" type="Timer" parent="." unique_id=1903067626]
+wait_time = 5.0
+one_shot = true
+
+[node name="PlayerArea" type="Area3D" parent="." unique_id=1138104187]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea" unique_id=1155453439]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21453857, 0)
+shape = SubResource("CylinderShape3D_pwea5")
